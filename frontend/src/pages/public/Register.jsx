@@ -22,8 +22,15 @@ export default function Register() {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(RegisterSchema),
+    mode: 'onTouched',
     defaultValues: { nome:'', email:'', cpf:'', telefone:'', senha:'', confirmaSenha:'' },
   })
+
+  // DEBUG: loga os erros de validação que estão impedindo o submit
+  const onValidationError = (errs) => {
+    // eslint-disable-next-line no-console
+    console.warn('[Register] Erros de validação bloqueando submit:', errs)
+  }
 
   async function onSubmit(values) {
     try {
@@ -52,7 +59,7 @@ export default function Register() {
         </div>
 
         <Card className="p-6">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+          <form onSubmit={handleSubmit(onSubmit, onValidationError)} className="space-y-4" noValidate>
             <Input
               label="Nome completo"
               placeholder="João da Silva"
