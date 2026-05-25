@@ -57,10 +57,18 @@ const Field = forwardRef(function Field({
   )
 })
 
-export const Input    = (props) => <Field as="input"    {...props} />
-export const Textarea = (props) => <Field as="textarea" {...props} />
-export const Select   = ({ children, ...props }) => (
-  <Field as="select" {...props}>{children}</Field>
-)
+// IMPORTANTE: forwardRef em todos os wrappers, senão o `ref` do react-hook-form
+// (vindo de `register()`) é descartado pelo React e o form fica "vazio".
+export const Input = forwardRef(function Input(props, ref) {
+  return <Field as="input" ref={ref} {...props} />
+})
+
+export const Textarea = forwardRef(function Textarea(props, ref) {
+  return <Field as="textarea" ref={ref} {...props} />
+})
+
+export const Select = forwardRef(function Select({ children, ...props }, ref) {
+  return <Field as="select" ref={ref} {...props}>{children}</Field>
+})
 
 export default Input
