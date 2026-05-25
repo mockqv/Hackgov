@@ -5,22 +5,39 @@ import lombok.Data;
 
 @Data
 public class SolicitacaoRequest {
-    @NotNull(message = "ID do cidadão é obrigatório")
-    private Long cidadaoId;
-    @NotNull(message = "ID do tipo de serviço é obrigatório")
+
+    @NotNull(message = "Tipo de serviço é obrigatório")
     private Long tipoServicoId;
+
     @NotBlank(message = "Descrição é obrigatória")
-    @Size(min = 10, max = 500)
+    @Size(min = 10, max = 500, message = "Descrição deve ter entre 10 e 500 caracteres")
     private String descricao;
-    @NotNull @DecimalMin("-90.0") @DecimalMax("90.0")
+
+    @NotNull(message = "Latitude é obrigatória")
+    @DecimalMin(value = "-90.0",  message = "Latitude inválida")
+    @DecimalMax(value = "90.0",   message = "Latitude inválida")
     private Double latitude;
-    @NotNull @DecimalMin("-180.0") @DecimalMax("180.0")
+
+    @NotNull(message = "Longitude é obrigatória")
+    @DecimalMin(value = "-180.0", message = "Longitude inválida")
+    @DecimalMax(value = "180.0",  message = "Longitude inválida")
     private Double longitude;
+
+    @Size(max = 200, message = "Logradouro muito longo")
     private String logradouro;
+
+    @Size(max = 20, message = "Número muito longo")
     private String numero;
+
+    @Size(max = 100, message = "Complemento muito longo")
     private String complemento;
+
+    @Pattern(regexp = "^$|\\d{8}", message = "CEP deve ter 8 dígitos numéricos")
     private String cep;
-    @NotNull(message = "ID do bairro é obrigatório")
+
+    @NotNull(message = "Bairro é obrigatório")
     private Long bairroId;
+
+    @Size(max = 300)
     private String caminhoFotoAntes;
 }

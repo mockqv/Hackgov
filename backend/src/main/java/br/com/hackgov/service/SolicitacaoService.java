@@ -5,6 +5,8 @@ import br.com.hackgov.exception.BusinessException;
 import br.com.hackgov.exception.NotFoundException;
 import br.com.hackgov.model.*;
 import br.com.hackgov.repository.*;
+import br.com.hackgov.security.AuthUtils;
+import br.com.hackgov.security.AuthenticatedUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,11 +30,15 @@ public class SolicitacaoService {
     private final HistoricoStatusRepository historicoRepo;
     private final AvaliacaoRepository      avaliacaoRepo;
 
-    // ── CRIAR SOLICITAÇÃO ────────────────────────────────────
+    // ── CRIAR SOLICITAÇÃO (usuário autenticado = CIDADAO) ────
     public SolicitacaoDetalheResponse criar(SolicitacaoRequest req) {
 
-        // 1. Buscar entidades
-        Cidadao cidadao = cidadaoRepo.findById(req.getCidadaoId())
+        AuthenticatedUser principal = AuthUtils.require();
+        if (principal.getKind() != AuthenticatedUser.Kind.CIDADAO) {
+            throw new BusinessException("Apenas cidadãos podem abrir solicitações");
+        }
+
+        Cidadao cidadao = cidadaoRepo.findById(principal.getId())
                 .orElseThrow(() -> new NotFoundException("Cidadão não encontrado"));
 
         TipoServico tipo = tipoServicoRepo.findById(req.getTipoServicoId())
@@ -41,7 +47,6 @@ public class SolicitacaoService {
         Bairro bairro = bairroRepo.findById(req.getBairroId())
                 .orElseThrow(() -> new NotFoundException("Bairro não encontrado"));
 
-        // 2. Verificar duplicata (raio 10m, mesmo tipo, status aberto)
         List<Solicitacao> duplicatas = solicitacaoRepo
                 .findDuplicatas(req.getLatitude(), req.getLongitude(), tipo.getId());
 
@@ -54,7 +59,6 @@ public class SolicitacaoService {
             );
         }
 
-        // 3. Criar localização
         Localizacao loc = Localizacao.builder()
                 .latitude(req.getLatitude())
                 .longitude(req.getLongitude())
@@ -65,10 +69,8 @@ public class SolicitacaoService {
                 .bairro(bairro)
                 .build();
 
-        // 4. Calcular previsão baseada no SLA
         LocalDate previsao = LocalDate.now().plusDays(tipo.getSlaDias());
 
-        // 5. Criar e salvar solicitação
         Solicitacao solic = Solicitacao.builder()
                 .cidadao(cidadao)
                 .tipoServico(tipo)
@@ -79,12 +81,12 @@ public class SolicitacaoService {
                 .build();
 
         Solicitacao salva = solicitacaoRepo.save(solic);
-        log.info("Solicitação criada: {}", salva.getProtocolo());
+        log.info("Solicitação criada: {} por cidadão {}", salva.getProtocolo(), cidadao.getId());
 
         return SolicitacaoDetalheResponse.from(salva);
     }
 
-    // ── BUSCAR POR PROTOCOLO ─────────────────────────────────
+    // ── BUSCAR POR PROTOCOLO (público) ───────────────────────
     @Transactional(readOnly = true)
     public SolicitacaoDetalheResponse buscarPorProtocolo(String protocolo) {
         Solicitacao s = solicitacaoRepo.findByProtocolo(protocolo.toUpperCase())
@@ -92,7 +94,7 @@ public class SolicitacaoService {
         return SolicitacaoDetalheResponse.from(s);
     }
 
-    // ── BUSCAR POR ID ────────────────────────────────────────
+    // ── BUSCAR POR ID (interno) ──────────────────────────────
     @Transactional(readOnly = true)
     public SolicitacaoDetalheResponse buscarPorId(Long id) {
         Solicitacao s = solicitacaoRepo.findById(id)
@@ -100,14 +102,18 @@ public class SolicitacaoService {
         return SolicitacaoDetalheResponse.from(s);
     }
 
-    // ── LISTAR DO CIDADÃO ────────────────────────────────────
+    // ── LISTAR DO CIDADÃO LOGADO ─────────────────────────────
     @Transactional(readOnly = true)
-    public List<SolicitacaoResumoResponse> listarPorCidadao(Long cidadaoId) {
-        return solicitacaoRepo.findByCidadaoIdOrderByDataAberturaDesc(cidadaoId)
+    public List<SolicitacaoResumoResponse> listarMinhas() {
+        AuthenticatedUser principal = AuthUtils.require();
+        if (principal.getKind() != AuthenticatedUser.Kind.CIDADAO) {
+            throw new BusinessException("Apenas cidadãos têm 'minhas solicitações'");
+        }
+        return solicitacaoRepo.findByCidadaoIdOrderByDataAberturaDesc(principal.getId())
                 .stream().map(SolicitacaoResumoResponse::from).toList();
     }
 
-    // ── LISTAR TODAS ABERTAS (painel servidor) ────────────────
+    // ── LISTAR TODAS ABERTAS (servidor/gestor) ───────────────
     @Transactional(readOnly = true)
     public List<SolicitacaoResumoResponse> listarAbertas() {
         return solicitacaoRepo.findTodasAbertas()
@@ -121,46 +127,45 @@ public class SolicitacaoService {
                 .stream().map(SolicitacaoResumoResponse::from).toList();
     }
 
-    // ── ATUALIZAR STATUS ──────────────────────────────────────
+    // ── ATUALIZAR STATUS (servidor autenticado) ──────────────
     public SolicitacaoDetalheResponse atualizarStatus(Long id, AtualizarStatusRequest req) {
+
+        AuthenticatedUser principal = AuthUtils.require();
+        if (principal.getKind() != AuthenticatedUser.Kind.SERVIDOR) {
+            throw new BusinessException("Apenas servidores podem atualizar status");
+        }
 
         Solicitacao solic = solicitacaoRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Solicitação não encontrada"));
 
-        Servidor servidor = servidorRepo.findById(req.getServidorId())
+        Servidor servidor = servidorRepo.findById(principal.getId())
                 .orElseThrow(() -> new NotFoundException("Servidor não encontrado"));
 
-        StatusSolicitacao novoStatus;
-        try {
-            novoStatus = StatusSolicitacao.valueOf(req.getNovoStatus().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new BusinessException("Status inválido: " + req.getNovoStatus());
+        StatusSolicitacao novoStatus = req.getNovoStatus();
+        StatusSolicitacao atual = solic.getStatus();
+
+        if (atual == StatusSolicitacao.CONCLUIDO || atual == StatusSolicitacao.CANCELADO) {
+            throw new BusinessException("Solicitação já está encerrada com status: " + atual);
         }
 
-        // Validar transição: não pode regredir depois de CONCLUIDO/CANCELADO
-        if (solic.getStatus() == StatusSolicitacao.CONCLUIDO ||
-            solic.getStatus() == StatusSolicitacao.CANCELADO) {
-            throw new BusinessException("Solicitação já está encerrada com status: " + solic.getStatus());
-        }
-
-        // Registrar foto do depois se for concluir
         if (novoStatus == StatusSolicitacao.CONCLUIDO && req.getCaminhoFotoDepois() != null) {
             solic.setCaminhoFotoDepois(req.getCaminhoFotoDepois());
         }
 
-        // Registrar histórico (imutável)
         HistoricoStatus hist = HistoricoStatus.builder()
                 .solicitacao(solic)
                 .servidor(servidor)
-                .statusAnterior(solic.getStatus())
+                .statusAnterior(atual)
                 .statusNovo(novoStatus)
                 .justificativa(req.getJustificativa())
                 .build();
         historicoRepo.save(hist);
 
-        // Atribuir servidor responsável e atualizar status
         solic.setServidor(servidor);
         solic.atualizarStatus(novoStatus);
+
+        log.info("Status atualizado: {} {} -> {} por servidor {}",
+                solic.getProtocolo(), atual, novoStatus, servidor.getId());
 
         return SolicitacaoDetalheResponse.from(solicitacaoRepo.save(solic));
     }
@@ -172,14 +177,23 @@ public class SolicitacaoService {
                 .stream().map(HistoricoStatusResponse::from).toList();
     }
 
-    // ── AVALIAR SERVIÇO ───────────────────────────────────────
+    // ── AVALIAR SERVIÇO (cidadão autor da solicitação) ───────
     public void avaliar(Long id, AvaliacaoRequest req) {
+
+        AuthenticatedUser principal = AuthUtils.require();
+        if (principal.getKind() != AuthenticatedUser.Kind.CIDADAO) {
+            throw new BusinessException("Apenas cidadãos podem avaliar");
+        }
 
         Solicitacao solic = solicitacaoRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Solicitação não encontrada"));
 
+        if (!solic.getCidadao().getId().equals(principal.getId())) {
+            throw new BusinessException("Você só pode avaliar suas próprias solicitações");
+        }
+
         if (solic.getStatus() != StatusSolicitacao.CONCLUIDO) {
-            throw new BusinessException("Avaliação só disponível para solicitações CONCLUÍDAS");
+            throw new BusinessException("Avaliação só disponível para solicitações concluídas");
         }
 
         if (avaliacaoRepo.findBySolicitacaoId(id).isPresent()) {
@@ -193,6 +207,6 @@ public class SolicitacaoService {
                 .build();
 
         avaliacaoRepo.save(aval);
-        log.info("Avaliação registrada para solicitação {}: {} estrela(s)", solic.getProtocolo(), req.getNota());
+        log.info("Avaliação registrada: solicitação {} nota {}", solic.getProtocolo(), req.getNota());
     }
 }
