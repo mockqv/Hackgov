@@ -2,7 +2,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { User, Mail, Lock, IdCard, Phone } from 'lucide-react'
+import { User, Mail, Lock, CreditCard, Phone } from 'lucide-react'
 
 import { useAuth } from '../../contexts/AuthContext'
 import { RegisterSchema } from '../../lib/validation'
@@ -82,7 +82,7 @@ export default function Register() {
                   <Input
                     label="CPF"
                     placeholder="000.000.000-00"
-                    leftIcon={<IdCard size={15}/>}
+                    leftIcon={<CreditCard size={15}/>}
                     inputMode="numeric"
                     autoComplete="off"
                     required
