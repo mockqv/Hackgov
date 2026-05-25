@@ -144,12 +144,50 @@ public class SolicitacaoService {
         StatusSolicitacao novoStatus = req.getNovoStatus();
         StatusSolicitacao atual = solic.getStatus();
 
-        if (atual == StatusSolicitacao.CONCLUIDO || atual == StatusSolicitacao.CANCELADO) {
-            throw new BusinessException("Solicitação já está encerrada com status: " + atual);
+        // 1. Não pode mexer em solicitação terminada
+        if (atual.isTerminal()) {
+            throw new BusinessException(
+                "Solicitação já está encerrada (" + atual.descricao() + ") — não pode ser alterada"
+            );
         }
 
-        if (novoStatus == StatusSolicitacao.CONCLUIDO && req.getCaminhoFotoDepois() != null) {
-            solic.setCaminhoFotoDepois(req.getCaminhoFotoDepois());
+        // 2. Não pode ficar no mesmo status (no-op)
+        if (novoStatus == atual) {
+            throw new BusinessException("O status novo é igual ao atual");
+        }
+
+        // 3. Máquina de estados estrita
+        if (!atual.podeTransicionarPara(novoStatus)) {
+            throw new BusinessException(
+                "Transição inválida: " + atual.descricao() + " → " + novoStatus.descricao()
+            );
+        }
+
+        // 4. Conclusão exige foto do depois
+        if (novoStatus == StatusSolicitacao.CONCLUIDO) {
+            String foto = req.getCaminhoFotoDepois();
+            if (foto == null || foto.isBlank()) {
+                throw new BusinessException("Foto do depois é obrigatória para concluir a solicitação");
+            }
+            solic.setCaminhoFotoDepois(foto.trim());
+        }
+
+        // 5. Cancelamento exige justificativa
+        if (novoStatus == StatusSolicitacao.CANCELADO) {
+            String just = req.getJustificativa();
+            if (just == null || just.isBlank()) {
+                throw new BusinessException("Justificativa é obrigatória para cancelar a solicitação");
+            }
+        }
+
+        // 6. Atribuição: depois de atribuído, só o próprio servidor ou um gestor pode mexer
+        Servidor atribuido = solic.getServidor();
+        if (atribuido != null
+                && !atribuido.getId().equals(servidor.getId())
+                && servidor.getPerfil() != br.com.hackgov.model.Perfil.GESTOR) {
+            throw new BusinessException(
+                "Solicitação atribuída a outro servidor — peça reatribuição ao gestor"
+            );
         }
 
         HistoricoStatus hist = HistoricoStatus.builder()
@@ -164,7 +202,7 @@ public class SolicitacaoService {
         solic.setServidor(servidor);
         solic.atualizarStatus(novoStatus);
 
-        log.info("Status atualizado: {} {} -> {} por servidor {}",
+        log.info("Status: {} {} -> {} por servidor #{}",
                 solic.getProtocolo(), atual, novoStatus, servidor.getId());
 
         return SolicitacaoDetalheResponse.from(solicitacaoRepo.save(solic));
