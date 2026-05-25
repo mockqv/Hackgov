@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface ServidorRepository extends JpaRepository<Servidor, Long> {
     Optional<Servidor> findByMatricula(String matricula);
+    Optional<Servidor> findByEmailFuncional(String emailFuncional);
 }

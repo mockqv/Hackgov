@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tipos-servico")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 @Tag(name = "Tipos de Serviço")
 public class TipoServicoController {
 

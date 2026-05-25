@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/solicitacoes")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 @Tag(name = "Solicitações")
 public class SolicitacaoController {
 
