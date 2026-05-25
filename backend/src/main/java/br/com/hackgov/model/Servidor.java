@@ -25,6 +25,19 @@ public class Servidor {
     @Column(name = "CARGO", length = 100)
     private String cargo;
 
+    @Column(name = "SENHA_HASH", nullable = false, length = 80)
+    private String senhaHash;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PERFIL", nullable = false, length = 20)
+    private Perfil perfil;
+
     @Column(name = "ATIVO", nullable = false, length = 1)
     private String ativo = "S";
+
+    @PrePersist
+    protected void prePersist() {
+        if (ativo == null) ativo = "S";
+        if (perfil == null) perfil = Perfil.SERVIDOR;
+    }
 }

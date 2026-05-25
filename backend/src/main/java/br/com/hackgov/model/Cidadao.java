@@ -27,6 +27,13 @@ public class Cidadao {
     @Column(name = "TELEFONE", length = 20)
     private String telefone;
 
+    @Column(name = "SENHA_HASH", nullable = false, length = 80)
+    private String senhaHash;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PERFIL", nullable = false, length = 20)
+    private Perfil perfil;
+
     @Column(name = "DATA_CADASTRO", nullable = false)
     private LocalDate dataCadastro;
 
@@ -37,5 +44,6 @@ public class Cidadao {
     protected void prePersist() {
         if (dataCadastro == null) dataCadastro = LocalDate.now();
         if (ativo == null) ativo = "S";
+        if (perfil == null) perfil = Perfil.CIDADAO;
     }
 }
