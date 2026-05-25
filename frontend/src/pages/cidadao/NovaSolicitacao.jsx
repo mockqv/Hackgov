@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { ArrowLeft, CheckCircle2, Copy, Send } from 'lucide-react'
 
-import { solicitacaoApi, tipoServicoApi } from '../../lib/api'
+import { solicitacaoApi, tipoServicoApi, nominatimReverse, nominatimForward } from '../../lib/api'
 import { SolicitacaoSchema } from '../../lib/validation'
 
 import Card from '../../components/ui/Card'
@@ -163,6 +163,18 @@ export default function NovaSolicitacao() {
                   setValue('latitude',  lat, { shouldValidate: true })
                   setValue('longitude', lng, { shouldValidate: true })
                 }}
+                onUserMove={async ({ lat, lng }) => {
+                  // Reverse geocode: pin → endereço
+                  const addr = await nominatimReverse({ lat, lng })
+                  if (!addr) return
+                  if (addr.logradouro) setValue('logradouro', addr.logradouro, { shouldValidate: true })
+                  if (addr.cep)        setValue('cep',        addr.cep,        { shouldValidate: true })
+                  if (addr.bairro || addr.cidade) {
+                    toast.success('Endereço preenchido', {
+                      description: [addr.logradouro, addr.bairro, addr.cidade].filter(Boolean).join(' · '),
+                    })
+                  }
+                }}
                 error={errors.latitude?.message || errors.longitude?.message}
               />
             )}
@@ -175,8 +187,19 @@ export default function NovaSolicitacao() {
                 <CepInput
                   value={field.value}
                   onChange={field.onChange}
-                  onResolve={(addr) => {
-                    if (addr.logradouro) setValue('logradouro', addr.logradouro)
+                  onResolve={async (addr) => {
+                    if (addr.logradouro) setValue('logradouro', addr.logradouro, { shouldValidate: true })
+                    // Forward geocode: CEP → mover pin
+                    const coords = await nominatimForward({
+                      cep: field.value,
+                      logradouro: addr.logradouro,
+                      cidade: addr.cidade,
+                      uf: addr.uf,
+                    })
+                    if (coords) {
+                      setValue('latitude',  coords.lat, { shouldValidate: true })
+                      setValue('longitude', coords.lng, { shouldValidate: true })
+                    }
                   }}
                   error={errors.cep?.message}
                 />

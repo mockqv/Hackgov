@@ -89,4 +89,57 @@ export const cepLookup = async (cep) => {
   } catch { return null }
 }
 
+// ── Nominatim (OpenStreetMap) — geocoding gratuito ──────────
+// TOS: máx 1 req/s. Usado em ação de usuário (click/drag/digitação completa de CEP).
+const NOMINATIM = 'https://nominatim.openstreetmap.org'
+
+/** lat/lng → endereço */
+export const nominatimReverse = async ({ lat, lng }) => {
+  try {
+    const url = `${NOMINATIM}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=pt-BR&zoom=18&addressdetails=1`
+    const r = await fetch(url, { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    const data = await r.json()
+    const a = data.address || {}
+    return {
+      logradouro: a.road || a.pedestrian || a.path || a.footway || '',
+      bairro:     a.suburb || a.neighbourhood || a.quarter || a.city_district || '',
+      cidade:     a.city || a.town || a.village || a.municipality || '',
+      uf:         (a['ISO3166-2-lvl4'] || '').split('-')[1] || '',
+      cep:        (a.postcode || '').replace(/\D/g, ''),
+      display:    data.display_name || '',
+    }
+  } catch { return null }
+}
+
+/** endereço → lat/lng. Tenta CEP primeiro, depois rua/cidade. */
+export const nominatimForward = async ({ cep, logradouro, numero, cidade, uf }) => {
+  const tryQuery = async (qs) => {
+    try {
+      const r = await fetch(`${NOMINATIM}/search?${qs}&format=jsonv2&countrycodes=br&limit=1&addressdetails=0`, {
+        headers: { Accept: 'application/json' },
+      })
+      if (!r.ok) return null
+      const arr = await r.json()
+      if (!Array.isArray(arr) || arr.length === 0) return null
+      return { lat: parseFloat(arr[0].lat), lng: parseFloat(arr[0].lon), display: arr[0].display_name }
+    } catch { return null }
+  }
+
+  // 1) CEP é o mais preciso
+  if (cep && cep.replace(/\D/g, '').length === 8) {
+    const result = await tryQuery(`postalcode=${cep.replace(/\D/g, '')}`)
+    if (result) return result
+  }
+  // 2) Rua + cidade + UF
+  if (logradouro && cidade) {
+    const street = numero ? `${numero} ${logradouro}` : logradouro
+    const qs = new URLSearchParams({
+      street, city: cidade, state: uf || '', country: 'Brasil',
+    }).toString()
+    return tryQuery(qs)
+  }
+  return null
+}
+
 export default api

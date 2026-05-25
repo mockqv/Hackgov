@@ -14,9 +14,13 @@ function RecenterControl({ to }) {
   return null
 }
 
-function ClickPin({ value, onChange }) {
+function ClickPin({ value, onChange, onUserMove }) {
   useMapEvents({
-    click: (e) => onChange({ lat: e.latlng.lat, lng: e.latlng.lng }),
+    click: (e) => {
+      const next = { lat: e.latlng.lat, lng: e.latlng.lng }
+      onChange(next)
+      onUserMove?.(next)
+    },
   })
   return value ? (
     <Marker
@@ -26,7 +30,9 @@ function ClickPin({ value, onChange }) {
       eventHandlers={{
         dragend: (e) => {
           const { lat, lng } = e.target.getLatLng()
-          onChange({ lat, lng })
+          const next = { lat, lng }
+          onChange(next)
+          onUserMove?.(next)
         },
       }}
     />
@@ -38,8 +44,14 @@ function ClickPin({ value, onChange }) {
  *  - clicar no mapa para definir um pin
  *  - arrastar o pin para refinar
  *  - usar localização do navegador
+ *
+ * Props:
+ *  - value:        { lat, lng } | null   — posição atual do pin (controlled)
+ *  - onChange:     ({lat,lng}) => void   — disparado a CADA mudança (user OU programática)
+ *  - onUserMove:   ({lat,lng}) => void   — disparado SÓ quando user clica/arrasta/usa GPS
+ *                                          Use para fazer reverse geocoding sem causar loop.
  */
-export default function LocationPicker({ value, onChange, error, height = 280 }) {
+export default function LocationPicker({ value, onChange, onUserMove, error, height = 280 }) {
   const [recenter, setRecenter] = useState(null)
 
   const handleGeolocate = () => {
@@ -48,12 +60,18 @@ export default function LocationPicker({ value, onChange, error, height = 280 })
       (pos) => {
         const next = { lat: pos.coords.latitude, lng: pos.coords.longitude }
         onChange(next)
+        onUserMove?.(next)
         setRecenter([next.lat, next.lng])
       },
       () => {}, // ignora erros silenciosamente
       { enableHighAccuracy: true, timeout: 6000 },
     )
   }
+
+  // Recentraliza quando `value` muda externamente (ex: CEP foi resolvido)
+  useEffect(() => {
+    if (value) setRecenter([value.lat, value.lng])
+  }, [value?.lat, value?.lng])
 
   const center = value ? [value.lat, value.lng] : DEFAULT
 
@@ -80,7 +98,7 @@ export default function LocationPicker({ value, onChange, error, height = 280 })
             attribution='&copy; OpenStreetMap'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
           />
-          <ClickPin value={value} onChange={onChange}/>
+          <ClickPin value={value} onChange={onChange} onUserMove={onUserMove}/>
           <RecenterControl to={recenter}/>
         </MapContainer>
       </div>
