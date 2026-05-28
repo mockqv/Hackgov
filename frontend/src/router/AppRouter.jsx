@@ -8,6 +8,7 @@ import { PERFIL }      from './roles'
 // Layouts
 import AppLayout    from '../components/layout/AppLayout'
 import PublicLayout from '../components/layout/PublicLayout'
+import SmartLayout  from '../components/layout/SmartLayout'
 
 // Páginas públicas
 import Login        from '../pages/public/Login'
@@ -38,10 +39,13 @@ export default function AppRouter() {
         {/* raiz dinâmica */}
         <Route path="/" element={<RootRedirect />} />
 
-        {/* ─── PÚBLICAS (PublicLayout) ─── */}
-        <Route element={<PublicLayout />}>
+        {/* ─── MAPA PÚBLICO — layout adaptativo (sidebar se logado, header público se visitante) ─── */}
+        <Route element={<SmartLayout />}>
           <Route path="mapa-publico" element={<MapaPublico />} />
+        </Route>
 
+        {/* ─── AUTENTICAÇÃO (sempre PublicLayout) ─── */}
+        <Route element={<PublicLayout />}>
           <Route path="login"    element={<PublicOnlyRoute><Login    /></PublicOnlyRoute>} />
           <Route path="cadastro" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
         </Route>

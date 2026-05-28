@@ -5,7 +5,6 @@ import { Plus, RefreshCw, Search } from 'lucide-react'
 import useApi from '../../hooks/useApi'
 import { solicitacaoApi } from '../../lib/api'
 import { useAuth } from '../../contexts/AuthContext'
-import { homeForRole } from '../../router/roles'
 
 import CityMap from '../../components/map/CityMap'
 import Card from '../../components/ui/Card'
@@ -63,11 +62,6 @@ export default function MapaPublico() {
           {!isAuthenticated && (
             <Link to="/login">
               <Button size="sm">Entrar</Button>
-            </Link>
-          )}
-          {isAuthenticated && (
-            <Link to={homeForRole(user?.perfil)}>
-              <Button variant="ghost" size="sm">Ir para o app</Button>
             </Link>
           )}
         </div>
