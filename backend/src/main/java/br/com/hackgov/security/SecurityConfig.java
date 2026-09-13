@@ -31,6 +31,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final RateLimitFilter rateLimitFilter;
     private final CustomUserDetailsService userDetailsService;
 
     @Value("${app.cors.allowed-origins}")
@@ -81,7 +82,10 @@ public class SecurityConfig {
                 .accessDeniedHandler((req, res, ex) -> writeJson(res, mapper,
                         HttpStatus.FORBIDDEN, "Acesso negado para este recurso"))
             )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+            // Antes até do filtro JWT: /api/auth/** é público, então a única barreira
+            // contra força bruta de login/cadastro em massa é o rate limit, não o token.
+            .addFilterBefore(rateLimitFilter, JwtAuthFilter.class);
 
         return http.build();
     }
