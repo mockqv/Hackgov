@@ -8,13 +8,13 @@ export default function App() {
       <AppRouter />
       <Toaster
         position="top-right"
-        theme="dark"
+        theme="light"
         toastOptions={{
           classNames: {
-            toast: 'bg-slate-900 border border-slate-700 text-slate-100',
-            success: 'border-green-700/40',
-            error: 'border-red-700/40',
-            description: 'text-slate-400',
+            toast: 'bg-white border border-slate-200 text-slate-900 shadow-lg',
+            success: 'border-emerald-200',
+            error: 'border-red-200',
+            description: 'text-slate-500',
           },
         }}
       />

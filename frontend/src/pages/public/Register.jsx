@@ -52,8 +52,8 @@ export default function Register() {
     <div className="flex-1 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-7">
-          <h1 className="text-2xl font-bold text-white">Criar sua conta</h1>
-          <p className="text-slate-400 text-sm mt-1.5">
+          <h1 className="text-2xl font-bold font-display text-slate-900">Criar sua conta</h1>
+          <p className="text-slate-500 text-sm mt-1.5">
             Abra solicitações de zeladoria e acompanhe seu protocolo.
           </p>
         </div>
@@ -147,9 +147,9 @@ export default function Register() {
           </form>
         </Card>
 
-        <p className="text-center text-sm text-slate-400 mt-6">
+        <p className="text-center text-sm text-slate-500 mt-6">
           Já tem conta?{' '}
-          <Link to="/login" className="text-blue-400 hover:text-blue-300 font-semibold">
+          <Link to="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
             Entrar
           </Link>
         </p>

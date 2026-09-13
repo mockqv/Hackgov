@@ -1,12 +1,12 @@
 import { cn } from '../../lib/cn'
 
 const VARIANTS = {
-  neutral: 'bg-slate-800/80 text-slate-300 border-slate-700',
-  red:     'bg-red-500/10    text-red-300    border-red-500/30',
-  amber:   'bg-amber-500/10  text-amber-300  border-amber-500/30',
-  blue:    'bg-blue-500/10   text-blue-300   border-blue-500/30',
-  green:   'bg-green-500/10  text-green-300  border-green-500/30',
-  slate:   'bg-slate-500/10  text-slate-300  border-slate-500/30',
+  neutral: 'bg-slate-100  text-slate-600   border-slate-200',
+  red:     'bg-red-50     text-red-700     border-red-200',
+  amber:   'bg-amber-50   text-amber-700   border-amber-200',
+  blue:    'bg-blue-50    text-blue-700    border-blue-200',
+  green:   'bg-emerald-50 text-emerald-700 border-emerald-200',
+  slate:   'bg-slate-100  text-slate-500   border-slate-200',
 }
 
 export default function Badge({ variant = 'neutral', className, children }) {

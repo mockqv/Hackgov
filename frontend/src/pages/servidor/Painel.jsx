@@ -73,9 +73,9 @@ export default function Painel() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="h-14 flex items-center justify-between px-5 border-b border-slate-800 flex-shrink-0">
+      <div className="h-14 flex items-center justify-between px-5 border-b border-slate-200 bg-white flex-shrink-0">
         <div>
-          <h1 className="text-sm font-bold text-white">Painel de triagem</h1>
+          <h1 className="text-sm font-bold text-slate-900">Painel de triagem</h1>
           <p className="text-[11px] text-slate-500">{filtered.length} de {items.length} exibidas</p>
         </div>
         <Button variant="secondary" size="sm" onClick={refresh}>
@@ -84,12 +84,12 @@ export default function Painel() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-3 px-5 py-3 border-b border-slate-800 flex-shrink-0">
+      <div className="grid grid-cols-4 gap-3 px-5 py-3 border-b border-slate-200 bg-white flex-shrink-0">
         {[
-          { val: counts.RECEBIDO,    label: 'Aguardando triagem', cls: 'text-red-400'   },
-          { val: counts.ANDAMENTO,   label: 'Em andamento',       cls: 'text-amber-400' },
-          { val: counts.SLA_VENCIDO, label: 'SLA vencido',        cls: 'text-red-400'   },
-          { val: counts.TOTAL,       label: 'Total aberto',       cls: 'text-blue-400'  },
+          { val: counts.RECEBIDO,    label: 'Aguardando triagem', cls: 'text-red-600'   },
+          { val: counts.ANDAMENTO,   label: 'Em andamento',       cls: 'text-amber-600' },
+          { val: counts.SLA_VENCIDO, label: 'SLA vencido',        cls: 'text-red-600'   },
+          { val: counts.TOTAL,       label: 'Total aberto',       cls: 'text-blue-600'  },
         ].map(s => (
           <Card key={s.label} className="px-4 py-2.5 text-center">
             <div className={`text-2xl font-black ${s.cls}`}>{s.val}</div>
@@ -99,13 +99,13 @@ export default function Painel() {
       </div>
 
       {/* Filtros */}
-      <div className="flex gap-2 px-5 py-3 border-b border-slate-800 flex-shrink-0 overflow-x-auto">
+      <div className="flex gap-2 px-5 py-3 border-b border-slate-200 bg-white flex-shrink-0 overflow-x-auto">
         {['TODOS','RECEBIDO','EM_ANALISE','AGENDADO','EM_EXECUCAO'].map(s => (
           <button key={s} onClick={() => setFilter(s)}
-            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors
+            className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors cursor-pointer
               ${filter === s
-                ? 'bg-blue-600/20 border-blue-500/40 text-blue-300'
-                : 'bg-slate-900 border-slate-700/60 text-slate-400 hover:text-slate-200'}`}>
+                ? 'bg-blue-50 border-blue-200 text-blue-700'
+                : 'bg-white border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50'}`}>
             {s === 'TODOS' ? 'Todos' : s.replace('_',' ').toLowerCase()}
           </button>
         ))}
@@ -127,24 +127,24 @@ export default function Painel() {
         ) : filtered.length === 0 ? (
           <EmptyState title="Tudo limpo!" description="Nenhuma solicitação no filtro atual."/>
         ) : (
-          <ul className="divide-y divide-slate-800/60">
+          <ul className="divide-y divide-slate-100">
             {filtered.map(item => {
               const vencido = item.dataPrevisao && new Date(item.dataPrevisao) < new Date()
               return (
-                <li key={item.id} className={`px-5 py-3.5 hover:bg-slate-900/40 transition-colors
+                <li key={item.id} className={`px-5 py-3.5 hover:bg-slate-50 transition-colors
                                               ${vencido ? 'border-l-2 border-l-red-500' : ''}`}>
                   <div className="flex items-start gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-mono text-[10px] text-slate-500">{item.protocolo}</span>
                         {vencido && (
-                          <span className="flex items-center gap-1 text-[10px] text-red-400 font-semibold">
+                          <span className="flex items-center gap-1 text-[10px] text-red-600 font-semibold">
                             <AlertTriangle size={10}/> SLA vencido
                           </span>
                         )}
                       </div>
-                      <div className="text-sm font-bold text-white mt-0.5 truncate">{item.tipoDescricao}</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5 truncate">
+                      <div className="text-sm font-bold text-slate-900 mt-0.5 truncate">{item.tipoDescricao}</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5 truncate">
                         {item.logradouro && `${item.logradouro} · `}{item.nomeBairro}
                       </div>
                       <div className="text-[10px] text-slate-500 mt-1">
@@ -205,8 +205,8 @@ function UpdateStatusModal({ item, onClose, onDone }) {
     <Modal open onClose={onClose} title="Atualizar status">
       <div className="mb-4">
         <div className="font-mono text-[10px] text-slate-500">{item.protocolo}</div>
-        <div className="text-sm font-bold text-white mt-0.5">{item.tipoDescricao}</div>
-        <div className="text-[11px] text-slate-400 mt-0.5">
+        <div className="text-sm font-bold text-slate-900 mt-0.5">{item.tipoDescricao}</div>
+        <div className="text-[11px] text-slate-500 mt-0.5">
           {item.logradouro && `${item.logradouro} · `}{item.nomeBairro}
         </div>
         <div className="text-[11px] mt-2 text-slate-500">

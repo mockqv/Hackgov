@@ -20,7 +20,7 @@ export default function MinhasSolicitacoes() {
     <div className="max-w-3xl mx-auto p-6 space-y-5">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold text-white">Minhas solicitações</h1>
+          <h1 className="text-lg font-bold font-display text-slate-900">Minhas solicitações</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             {items.length} {items.length === 1 ? 'solicitação' : 'solicitações'}
           </p>
@@ -59,15 +59,15 @@ export default function MinhasSolicitacoes() {
           />
         </Card>
       ) : (
-        <Card className="divide-y divide-slate-800/60 overflow-hidden">
+        <Card className="divide-y divide-slate-100 overflow-hidden">
           {items.map(s => (
             <Link key={s.id} to={`/acompanhar/${s.protocolo}`}
-              className="flex items-center gap-3 p-3.5 hover:bg-slate-800/40 transition-colors">
-              <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700/50 flex items-center justify-center text-slate-400">
+              className="flex items-center gap-3 p-3.5 hover:bg-slate-50 transition-colors">
+              <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
                 <FileText size={15}/>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-white truncate">{s.tipoDescricao}</div>
+                <div className="text-sm font-semibold text-slate-900 truncate">{s.tipoDescricao}</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">
                   <span className="font-mono">{s.protocolo}</span> · {s.nomeBairro || '—'} · {formatDate(s.dataAbertura)}
                 </div>

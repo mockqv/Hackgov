@@ -27,24 +27,24 @@ export default function Modal({ open, onClose, title, children, footer, size = '
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
+      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in"
       onClick={(e) => e.target === e.currentTarget && onClose?.()}>
       <div className={cn(
-        'w-full bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl',
+        'w-full bg-white border border-slate-200 rounded-2xl shadow-2xl shadow-slate-900/10',
         'flex flex-col max-h-[90vh]',
         widths[size],
       )}>
-        <div className="flex items-start justify-between gap-3 px-5 py-4 border-b border-slate-800">
-          <h3 className="text-sm font-bold text-slate-100">{title}</h3>
+        <div className="flex items-start justify-between gap-3 px-5 py-4 border-b border-slate-200">
+          <h3 className="text-sm font-bold text-slate-900">{title}</h3>
           <button onClick={onClose}
             aria-label="Fechar"
-            className="text-slate-500 hover:text-slate-200 transition-colors -mr-1 -mt-1 p-1 rounded-md hover:bg-slate-800">
+            className="text-slate-500 hover:text-slate-700 transition-colors -mr-1 -mt-1 p-1 rounded-md hover:bg-slate-100">
             <X size={16}/>
           </button>
         </div>
         <div className="p-5 overflow-y-auto">{children}</div>
         {footer && (
-          <div className="px-5 py-3.5 border-t border-slate-800 flex justify-end gap-2.5">
+          <div className="px-5 py-3.5 border-t border-slate-200 flex justify-end gap-2.5">
             {footer}
           </div>
         )}

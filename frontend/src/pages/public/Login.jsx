@@ -36,8 +36,8 @@ export default function Login() {
     <div className="flex-1 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-7">
-          <h1 className="text-2xl font-bold text-white">Entrar na sua conta</h1>
-          <p className="text-slate-400 text-sm mt-1.5">
+          <h1 className="text-2xl font-bold font-display text-slate-900">Entrar na sua conta</h1>
+          <p className="text-slate-500 text-sm mt-1.5">
             Acompanhe e gerencie solicitações de zeladoria urbana.
           </p>
         </div>
@@ -72,9 +72,9 @@ export default function Login() {
           </form>
         </Card>
 
-        <p className="text-center text-sm text-slate-400 mt-6">
+        <p className="text-center text-sm text-slate-500 mt-6">
           Ainda não tem conta?{' '}
-          <Link to="/cadastro" className="text-blue-400 hover:text-blue-300 font-semibold">
+          <Link to="/cadastro" className="text-blue-600 hover:text-blue-700 font-semibold">
             Criar conta
           </Link>
         </p>

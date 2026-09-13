@@ -25,7 +25,7 @@ function ClickPin({ value, onChange, onUserMove }) {
   return value ? (
     <Marker
       position={[value.lat, value.lng]}
-      icon={statusIcon('#3b82f6', true)}
+      icon={statusIcon('#2563eb', true)}
       draggable
       eventHandlers={{
         dragend: (e) => {
@@ -78,8 +78,8 @@ export default function LocationPicker({ value, onChange, onUserMove, error, hei
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-          Local no mapa <span className="text-red-400 ml-0.5">*</span>
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+          Local no mapa <span className="text-red-500 ml-0.5">*</span>
         </span>
         <Button type="button" variant="ghost" size="sm" onClick={handleGeolocate}>
           <Crosshair size={12}/> Usar minha localização
@@ -88,15 +88,15 @@ export default function LocationPicker({ value, onChange, onUserMove, error, hei
 
       <div
         style={{ height }}
-        className={`relative rounded-xl overflow-hidden border ${error ? 'border-red-500/60' : 'border-slate-700'}`}>
+        className={`relative rounded-xl overflow-hidden border ${error ? 'border-red-400' : 'border-slate-200'}`}>
         <MapContainer
           center={center}
           zoom={value ? 16 : 13}
           scrollWheelZoom
-          style={{ height: '100%', width: '100%', background: '#0f172a' }}>
+          style={{ height: '100%', width: '100%', background: '#f1f5f9' }}>
           <TileLayer
             attribution='&copy; OpenStreetMap'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           />
           <ClickPin value={value} onChange={onChange} onUserMove={onUserMove}/>
           <RecenterControl to={recenter}/>
@@ -104,7 +104,7 @@ export default function LocationPicker({ value, onChange, onUserMove, error, hei
       </div>
 
       {error
-        ? <p className="text-[11px] text-red-400">{error}</p>
+        ? <p className="text-[11px] text-red-600">{error}</p>
         : <p className="text-[11px] text-slate-500">
             Clique no mapa para definir o local. Você pode arrastar o pin para ajustar.
           </p>

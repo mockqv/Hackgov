@@ -45,9 +45,9 @@ export default function MapaPublico() {
   return (
     <div className="flex-1 flex flex-col">
       {/* Header */}
-      <div className="h-14 flex items-center justify-between px-5 border-b border-slate-800 flex-shrink-0">
+      <div className="h-14 flex items-center justify-between px-5 border-b border-slate-200 bg-white flex-shrink-0">
         <div>
-          <h1 className="text-sm font-bold text-white">Mapa público</h1>
+          <h1 className="text-sm font-bold text-slate-900">Mapa público</h1>
           <p className="text-[11px] text-slate-500">{items.length} solicitações no mapa</p>
         </div>
         <div className="flex gap-2">
@@ -69,13 +69,13 @@ export default function MapaPublico() {
 
       <div className="flex-1 flex overflow-hidden">
         {/* Mapa */}
-        <div className="flex-1 relative p-4">
+        <div className="flex-1 relative p-4 bg-slate-50">
           {/* Stats flutuante */}
           <div className="absolute top-6 left-6 z-[400] flex gap-2">
             {[
-              { val: counts.abertas,    label: 'Abertas',      cls: 'text-red-400'   },
-              { val: counts.andamento,  label: 'Em andamento', cls: 'text-amber-400' },
-              { val: counts.concluidas, label: 'Concluídas',   cls: 'text-green-400' },
+              { val: counts.abertas,    label: 'Abertas',      cls: 'text-red-600'    },
+              { val: counts.andamento,  label: 'Em andamento', cls: 'text-amber-600'  },
+              { val: counts.concluidas, label: 'Concluídas',   cls: 'text-emerald-600'},
             ].map(s => (
               <Card key={s.label} className="px-3 py-2 text-center">
                 <div className={`text-base font-black ${s.cls}`}>{s.val}</div>
@@ -88,7 +88,7 @@ export default function MapaPublico() {
           <div className="absolute bottom-6 left-6 z-[400]">
             <Card className="p-3 space-y-1.5">
               {Object.entries(STATUS_DOT).filter(([k]) => !['CANCELADO'].includes(k)).map(([k, c]) => (
-                <div key={k} className="flex items-center gap-2 text-[10.5px] text-slate-300">
+                <div key={k} className="flex items-center gap-2 text-[10.5px] text-slate-600">
                   <span className="w-2.5 h-2.5 rounded-full" style={{ background: c }}/>
                   {k.replace('_', ' ').toLowerCase()}
                 </div>
@@ -105,8 +105,8 @@ export default function MapaPublico() {
         </div>
 
         {/* Side panel */}
-        <aside className="w-80 border-l border-slate-800 flex flex-col overflow-hidden">
-          <div className="p-3.5 border-b border-slate-800">
+        <aside className="w-80 border-l border-slate-200 bg-white flex flex-col overflow-hidden">
+          <div className="p-3.5 border-b border-slate-200">
             <Input
               placeholder="Buscar por protocolo, tipo, bairro..."
               leftIcon={<Search size={14}/>}
@@ -120,11 +120,11 @@ export default function MapaPublico() {
               <div className="flex items-start justify-between">
                 <span className="font-mono text-[11px] text-slate-500">{selected.protocolo}</span>
                 <button onClick={() => setSelected(null)}
-                  className="text-slate-500 hover:text-slate-200 text-lg leading-none">×</button>
+                  className="text-slate-500 hover:text-slate-700 text-lg leading-none cursor-pointer">×</button>
               </div>
               <div>
-                <div className="text-sm font-bold text-white">{selected.tipoDescricao}</div>
-                <div className="text-[11px] text-slate-400 mt-1">
+                <div className="text-sm font-bold text-slate-900">{selected.tipoDescricao}</div>
+                <div className="text-[11px] text-slate-500 mt-1">
                   {selected.logradouro} {selected.logradouro && '— '}{selected.nomeBairro}
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function MapaPublico() {
               </Link>
             </div>
           ) : (
-            <div className="flex-1 overflow-y-auto divide-y divide-slate-800/60">
+            <div className="flex-1 overflow-y-auto divide-y divide-slate-100">
               {loading ? (
                 <div className="p-4 space-y-3">
                   {[1,2,3].map(i => <Skeleton key={i} className="h-12"/>)}
@@ -150,11 +150,11 @@ export default function MapaPublico() {
               ) : (
                 lista.map(item => (
                   <button key={item.id} onClick={() => setSelected(item)}
-                    className="w-full text-left p-3.5 hover:bg-slate-800/40 transition-colors">
+                    className="w-full text-left p-3.5 hover:bg-slate-50 transition-colors cursor-pointer">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
                         <div className="font-mono text-[9.5px] text-slate-500">{item.protocolo}</div>
-                        <div className="text-xs font-semibold text-slate-200 mt-0.5 truncate">{item.tipoDescricao}</div>
+                        <div className="text-xs font-semibold text-slate-700 mt-0.5 truncate">{item.tipoDescricao}</div>
                         <div className="text-[10px] text-slate-500 mt-0.5 truncate">{item.nomeBairro}</div>
                       </div>
                       <span className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"

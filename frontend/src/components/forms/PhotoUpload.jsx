@@ -33,21 +33,21 @@ export default function PhotoUpload({ label = 'Foto', value, onChange, error, re
 
   return (
     <div className="space-y-1.5">
-      <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-        {label}{required && <span className="text-red-400 ml-0.5">*</span>}
+      <label className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+        {label}{required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
 
       {value ? (
-        <div className="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900/60">
+        <div className="relative rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
           {isData ? (
             <img src={value} alt="Pré-visualização" className="w-full h-48 object-cover"/>
           ) : (
-            <div className="flex items-center gap-2 p-3 text-xs text-slate-400 font-mono truncate">
+            <div className="flex items-center gap-2 p-3 text-xs text-slate-500 font-mono truncate">
               <ImgIcon size={14}/> {value}
             </div>
           )}
           <button type="button" onClick={() => onChange?.('')}
-            className="absolute top-2 right-2 p-1.5 rounded-lg bg-black/60 hover:bg-black/80 text-white">
+            className="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-900/70 hover:bg-slate-900/90 text-white">
             <X size={13}/>
           </button>
         </div>
@@ -68,14 +68,14 @@ export default function PhotoUpload({ label = 'Foto', value, onChange, error, re
             'flex flex-col items-center justify-center gap-2 px-4 py-6 rounded-xl',
             'border border-dashed cursor-pointer transition-colors',
             dragOver
-              ? 'border-blue-500 bg-blue-500/10'
+              ? 'border-blue-500 bg-blue-50'
               : error
-                ? 'border-red-500/50 hover:border-red-500'
-                : 'border-slate-700 hover:border-slate-600 bg-slate-900/40',
+                ? 'border-red-400 hover:border-red-500'
+                : 'border-slate-300 hover:border-slate-400 bg-slate-50',
           )}>
           <Upload size={20} className="text-slate-500"/>
           <div className="text-center">
-            <div className="text-xs font-semibold text-slate-300">Clique ou arraste uma imagem</div>
+            <div className="text-xs font-semibold text-slate-600">Clique ou arraste uma imagem</div>
             <div className="text-[10px] text-slate-500 mt-0.5">PNG, JPG ou WEBP — até 5 MB</div>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function PhotoUpload({ label = 'Foto', value, onChange, error, re
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}
       />
-      {error && <p className="text-[11px] text-red-400">{error}</p>}
+      {error && <p className="text-[11px] text-red-600">{error}</p>}
     </div>
   )
 }

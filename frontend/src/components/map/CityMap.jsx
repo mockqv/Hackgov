@@ -20,15 +20,15 @@ export default function CityMap({ items = [], onSelect, selectedId, height = '10
     : DEFAULT_CENTER
 
   return (
-    <div style={{ height, width: '100%' }} className="relative rounded-2xl overflow-hidden border border-slate-800">
+    <div style={{ height, width: '100%' }} className="relative rounded-2xl overflow-hidden border border-slate-200">
       <MapContainer
         center={center}
         zoom={DEFAULT_ZOOM}
         scrollWheelZoom
-        style={{ height: '100%', width: '100%', background: '#0f172a' }}>
+        style={{ height: '100%', width: '100%', background: '#f1f5f9' }}>
         <TileLayer
           attribution='&copy; OpenStreetMap'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         {validos.map(item => (
           <Marker

@@ -28,7 +28,7 @@ export default function CepInput({ value, onChange, onResolve, error, ...rest })
       inputMode="numeric"
       autoComplete="postal-code"
       leftIcon={<Search size={14}/>}
-      rightSlot={loading ? <Loader2 size={14} className="animate-spin text-blue-400"/> : null}
+      rightSlot={loading ? <Loader2 size={14} className="animate-spin text-blue-600"/> : null}
       value={maskCep(value || '')}
       onChange={(e) => {
         const v = e.target.value.replace(/\D/g, '')

@@ -29,10 +29,10 @@ export default function Inicio() {
     <div className="max-w-5xl mx-auto p-6 space-y-7">
       {/* Saudação */}
       <header>
-        <h1 className="text-xl font-bold text-white">
-          Olá, {user?.nome?.split(' ')[0] || 'cidadão'} 👋
+        <h1 className="text-xl font-bold font-display text-slate-900">
+          Olá, {user?.nome?.split(' ')[0] || 'cidadão'}
         </h1>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-slate-500 text-sm mt-1">
           O que você gostaria de fazer hoje?
         </p>
       </header>
@@ -41,14 +41,14 @@ export default function Inicio() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {ACOES.map(({ to, icon: Icon, title, desc }) => (
           <Link key={to} to={to}>
-            <Card className="p-4 hover:border-blue-600/50 hover:bg-slate-900 transition-colors group">
-              <div className="w-9 h-9 rounded-xl bg-blue-600/15 border border-blue-500/20
-                              flex items-center justify-center text-blue-300
-                              group-hover:bg-blue-600/25 transition-colors">
+            <Card className="p-4 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200
+                              flex items-center justify-center text-blue-600
+                              group-hover:bg-blue-100 transition-colors">
                 <Icon size={16}/>
               </div>
               <div className="mt-3">
-                <div className="text-sm font-bold text-white">{title}</div>
+                <div className="text-sm font-bold text-slate-900">{title}</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">{desc}</div>
               </div>
             </Card>
@@ -59,15 +59,15 @@ export default function Inicio() {
       {/* Recentes */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-slate-200">Suas últimas solicitações</h2>
+          <h2 className="text-sm font-semibold text-slate-700">Suas últimas solicitações</h2>
           {!loading && minhas?.length > 0 && (
-            <Link to="/minhas-solicitacoes" className="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+            <Link to="/minhas-solicitacoes" className="text-xs text-blue-600 hover:text-blue-700 font-semibold">
               Ver todas →
             </Link>
           )}
         </div>
 
-        <Card className="divide-y divide-slate-800/60 overflow-hidden">
+        <Card className="divide-y divide-slate-100 overflow-hidden">
           {loading ? (
             <div className="p-4 space-y-3">
               {[1,2,3].map(i => (
@@ -91,7 +91,7 @@ export default function Inicio() {
               action={
                 <Link to="/nova-solicitacao"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold
-                             bg-blue-600 hover:bg-blue-500 text-white transition-colors">
+                             bg-blue-600 hover:bg-blue-700 text-white transition-colors">
                   <Plus size={14}/> Abrir solicitação
                 </Link>
               }
@@ -99,13 +99,13 @@ export default function Inicio() {
           ) : (
             recentes.map(s => (
               <Link key={s.id} to={`/acompanhar/${s.protocolo}`}
-                className="flex items-center gap-3 p-3.5 hover:bg-slate-800/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700/50
-                                flex items-center justify-center text-slate-400">
+                className="flex items-center gap-3 p-3.5 hover:bg-slate-50 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200
+                                flex items-center justify-center text-slate-500">
                   <FileText size={15}/>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold text-white truncate">{s.tipoDescricao}</div>
+                  <div className="text-sm font-semibold text-slate-900 truncate">{s.tipoDescricao}</div>
                   <div className="text-[11px] text-slate-500 mt-0.5">
                     <span className="font-mono">{s.protocolo}</span> · {formatDate(s.dataAbertura)}
                   </div>

@@ -18,24 +18,24 @@ const Field = forwardRef(function Field({
   const fieldId = id || (label ? `f-${label.replace(/\s+/g, '-')}` : undefined)
 
   const base = cn(
-    'w-full bg-slate-900/70 border rounded-xl text-sm text-slate-100',
-    'placeholder-slate-500 transition-colors',
-    'focus:outline-none focus:ring-2 focus:ring-blue-500/40',
+    'w-full bg-white border rounded-xl text-sm text-slate-900',
+    'placeholder-slate-400 transition-colors',
+    'focus:outline-none focus:ring-2 focus:ring-blue-500/25',
     error
-      ? 'border-red-500/60 focus:border-red-500'
-      : 'border-slate-700 focus:border-blue-500',
+      ? 'border-red-400 focus:border-red-500'
+      : 'border-slate-300 focus:border-blue-500',
     leftIcon ? 'pl-10 pr-3.5' : 'px-3.5',
     as === 'textarea' ? 'py-2.5 resize-y min-h-[88px]' : 'h-10 py-2',
-    'disabled:opacity-60 disabled:cursor-not-allowed',
+    'disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-slate-50',
     className,
   )
 
   return (
     <div className={cn('flex flex-col gap-1.5', containerClassName)}>
       {label && (
-        <label htmlFor={fieldId} className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+        <label htmlFor={fieldId} className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
           {label}
-          {required && <span className="text-red-400 ml-0.5">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
       <div className="relative">
@@ -51,7 +51,7 @@ const Field = forwardRef(function Field({
           </span>
         )}
       </div>
-      {error && <p className="text-[11px] text-red-400 leading-tight">{error}</p>}
+      {error && <p className="text-[11px] text-red-600 leading-tight">{error}</p>}
       {!error && hint && <p className="text-[11px] text-slate-500 leading-tight">{hint}</p>}
     </div>
   )

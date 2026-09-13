@@ -4,15 +4,15 @@ import { cn } from '../../lib/cn'
 
 const VARIANTS = {
   primary:
-    'bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white border-transparent shadow-sm shadow-blue-900/40',
+    'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white border-transparent shadow-sm shadow-blue-600/20',
   secondary:
-    'bg-slate-800 hover:bg-slate-700 active:bg-slate-700/80 text-slate-100 border-slate-700',
+    'bg-slate-100 hover:bg-slate-200 active:bg-slate-200 text-slate-700 border-slate-200',
   ghost:
-    'bg-transparent hover:bg-slate-800/60 text-slate-300 border-transparent',
+    'bg-transparent hover:bg-slate-100 text-slate-600 border-transparent',
   danger:
-    'bg-red-600 hover:bg-red-500 active:bg-red-700 text-white border-transparent shadow-sm shadow-red-900/40',
+    'bg-red-600 hover:bg-red-700 active:bg-red-800 text-white border-transparent shadow-sm shadow-red-600/20',
   outline:
-    'bg-transparent hover:bg-slate-800/60 text-slate-200 border-slate-700',
+    'bg-white hover:bg-slate-50 text-slate-700 border-slate-300',
 }
 
 const SIZES = {
@@ -38,7 +38,7 @@ const Button = forwardRef(function Button({
       disabled={disabled || loading}
       className={cn(
         'inline-flex items-center justify-center rounded-xl border font-semibold',
-        'transition-all duration-150 active:scale-[0.98]',
+        'transition-all duration-150 active:scale-[0.98] cursor-pointer',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100',
         VARIANTS[variant],
         SIZES[size],

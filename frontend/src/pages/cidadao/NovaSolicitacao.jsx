@@ -74,21 +74,21 @@ export default function NovaSolicitacao() {
     return (
       <div className="max-w-md mx-auto p-6 mt-6">
         <Card className="p-7 text-center space-y-5">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-            <CheckCircle2 size={28} className="text-green-400"/>
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+            <CheckCircle2 size={28} className="text-emerald-600"/>
           </div>
           <div>
-            <h2 className="text-lg font-bold text-white">Solicitação enviada!</h2>
-            <p className="text-slate-400 text-sm mt-1.5">
+            <h2 className="text-lg font-bold font-display text-slate-900">Solicitação enviada!</h2>
+            <p className="text-slate-500 text-sm mt-1.5">
               Seu chamado foi registrado e já está no mapa público.
             </p>
           </div>
-          <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 space-y-2">
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
             <div className="text-[10px] text-slate-500 uppercase tracking-wider">Protocolo</div>
-            <div className="font-mono text-lg font-bold text-blue-400 tracking-wider">{protocolo}</div>
+            <div className="font-mono text-lg font-bold text-blue-600 tracking-wider">{protocolo}</div>
             <button
               onClick={() => navigator.clipboard.writeText(protocolo).then(() => toast.success('Copiado!'))}
-              className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200">
+              className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700">
               <Copy size={11}/> Copiar
             </button>
           </div>
@@ -115,7 +115,7 @@ export default function NovaSolicitacao() {
           <ArrowLeft size={15}/>
         </Button>
         <div>
-          <h1 className="text-lg font-bold text-white">Nova solicitação</h1>
+          <h1 className="text-lg font-bold font-display text-slate-900">Nova solicitação</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Reporte um problema urbano para a prefeitura resolver.
           </p>
@@ -125,7 +125,7 @@ export default function NovaSolicitacao() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         {/* Tipo + Descrição */}
         <Card className="p-5 space-y-4">
-          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sobre o problema</h2>
+          <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Sobre o problema</h2>
           <Select
             label="Tipo de serviço"
             required
@@ -151,7 +151,7 @@ export default function NovaSolicitacao() {
 
         {/* Localização */}
         <Card className="p-5 space-y-4">
-          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Localização</h2>
+          <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Localização</h2>
 
           <Controller
             control={control}
@@ -227,7 +227,7 @@ export default function NovaSolicitacao() {
 
         {/* Foto */}
         <Card className="p-5">
-          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Foto do problema</h2>
+          <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Foto do problema</h2>
           <Controller
             control={control} name="caminhoFotoAntes"
             render={({ field }) => (

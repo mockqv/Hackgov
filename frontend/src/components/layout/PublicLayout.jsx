@@ -3,18 +3,19 @@ import { MapPin } from 'lucide-react'
 
 export default function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
-      <header className="h-14 border-b border-slate-800 px-5 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center font-black text-sm">H</div>
-          <div className="text-sm font-bold tracking-tight">HackGov</div>
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      <header className="h-14 border-b border-slate-200 bg-white px-4 sm:px-5 flex items-center justify-between gap-2">
+        <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
+          <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center font-black text-sm text-white">H</div>
+          <div className="text-sm font-bold font-display tracking-tight text-slate-900">HackGov</div>
         </Link>
-        <nav className="flex items-center gap-3 text-xs font-medium">
-          <Link to="/mapa-publico" className="text-slate-400 hover:text-white flex items-center gap-1.5">
-            <MapPin size={13}/> Mapa público
+        <nav className="flex items-center gap-1.5 sm:gap-3 text-xs font-medium flex-shrink-0">
+          <Link to="/mapa-publico" aria-label="Mapa público"
+            className="text-slate-500 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 p-2 sm:px-2 sm:py-1.5 rounded-lg transition-colors">
+            <MapPin size={14}/> <span className="hidden sm:inline">Mapa público</span>
           </Link>
-          <Link to="/login" className="text-slate-400 hover:text-white">Entrar</Link>
-          <Link to="/cadastro" className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+          <Link to="/login" className="text-slate-500 hover:text-slate-900 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">Entrar</Link>
+          <Link to="/cadastro" className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors whitespace-nowrap">
             Criar conta
           </Link>
         </nav>
