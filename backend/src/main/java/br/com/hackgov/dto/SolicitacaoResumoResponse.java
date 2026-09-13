@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @Builder
@@ -19,6 +20,8 @@ public class SolicitacaoResumoResponse {
     private Double longitude;
     private LocalDateTime dataAbertura;
     private LocalDate dataPrevisao;
+    /** Dias até o vencimento do SLA (negativo = já vencido). Usado para priorizar a fila de atendimento. */
+    private Long diasParaSla;
 
     public static SolicitacaoResumoResponse from(Solicitacao s) {
         return SolicitacaoResumoResponse.builder()
@@ -32,6 +35,9 @@ public class SolicitacaoResumoResponse {
                 .longitude(s.getLocalizacao().getLongitude())
                 .dataAbertura(s.getDataAbertura())
                 .dataPrevisao(s.getDataPrevisao())
+                .diasParaSla(s.getDataPrevisao() != null
+                        ? ChronoUnit.DAYS.between(LocalDate.now(), s.getDataPrevisao())
+                        : null)
                 .build();
     }
 }

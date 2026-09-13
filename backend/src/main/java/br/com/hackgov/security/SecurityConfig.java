@@ -60,13 +60,17 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(
                         "/api/auth/**",
-                        "/api/tipos-servico",
                         "/v3/api-docs/**",
                         "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/actuator/health",
                         "/actuator/info"
                 ).permitAll()
+                // Importante: o catálogo de tipos de serviço só é público em LEITURA.
+                // Antes da Fase 5 o matcher cobria "/api/tipos-servico" sem HttpMethod,
+                // o que liberaria também POST/PUT/DELETE assim que o CRUD fosse criado
+                // no mesmo path — corrigido para permitAll apenas em GET exato.
+                .requestMatchers(HttpMethod.GET, "/api/tipos-servico").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/solicitacoes/mapa").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/solicitacoes/protocolo/**").permitAll()
                 .anyRequest().authenticated()

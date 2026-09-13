@@ -57,9 +57,16 @@ public class SolicitacaoController {
 
     @GetMapping("/abertas")
     @PreAuthorize("hasAnyRole('SERVIDOR','GESTOR')")
-    @Operation(summary = "Painel de triagem do servidor")
+    @Operation(summary = "Painel de triagem do servidor (ordem de chegada)")
     public ResponseEntity<ApiResponse<List<SolicitacaoResumoResponse>>> abertas() {
         return ResponseEntity.ok(ApiResponse.ok(service.listarAbertas()));
+    }
+
+    @GetMapping("/fila-atendimento")
+    @PreAuthorize("hasAnyRole('SERVIDOR','GESTOR')")
+    @Operation(summary = "Fila de atendimento priorizada por urgência de SLA (fila de prioridade)")
+    public ResponseEntity<ApiResponse<List<SolicitacaoResumoResponse>>> filaAtendimento() {
+        return ResponseEntity.ok(ApiResponse.ok(service.filaAtendimento()));
     }
 
     @PatchMapping("/{id}/status")
@@ -72,8 +79,16 @@ public class SolicitacaoController {
 
     @GetMapping("/{id}/historico")
     @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Linha do tempo cronológica (uso: stepper do cidadão)")
     public ResponseEntity<ApiResponse<List<HistoricoStatusResponse>>> historico(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.ok(service.buscarHistorico(id)));
+    }
+
+    @GetMapping("/{id}/historico/auditoria")
+    @PreAuthorize("hasAnyRole('SERVIDOR','GESTOR')")
+    @Operation(summary = "Trilha de auditoria mais recente primeiro (pilha/LIFO)")
+    public ResponseEntity<ApiResponse<List<HistoricoStatusResponse>>> historicoAuditoria(@PathVariable Long id) {
+        return ResponseEntity.ok(ApiResponse.ok(service.buscarHistoricoAuditoria(id)));
     }
 
     @PostMapping("/{id}/avaliar")

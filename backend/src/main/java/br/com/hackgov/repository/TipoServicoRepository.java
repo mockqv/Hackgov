@@ -8,4 +8,7 @@ import java.util.List;
 @Repository
 public interface TipoServicoRepository extends JpaRepository<TipoServico, Long> {
     List<TipoServico> findByAtivoOrderByDescricao(String ativo);
+    List<TipoServico> findAllByOrderByDescricao();
+    boolean existsByCodigoIgnoreCase(String codigo);
+    boolean existsByCodigoIgnoreCaseAndIdNot(String codigo, Long id);
 }

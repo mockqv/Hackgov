@@ -22,8 +22,9 @@ import Acompanhar          from '../pages/cidadao/Acompanhar'
 import MinhasSolicitacoes  from '../pages/cidadao/MinhasSolicitacoes'
 
 // Páginas do servidor
-import Painel    from '../pages/servidor/Painel'
-import Dashboard from '../pages/servidor/Dashboard'
+import Painel       from '../pages/servidor/Painel'
+import Dashboard    from '../pages/servidor/Dashboard'
+import TiposServico from '../pages/servidor/TiposServico'
 
 // Erros
 import Forbidden from '../pages/erro/Forbidden'
@@ -61,6 +62,9 @@ export default function AppRouter() {
           {/* ─── PRIVADAS — SERVIDOR/GESTOR ─── */}
           <Route path="painel"    element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Painel    /></RoleRoute>} />
           <Route path="dashboard" element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Dashboard /></RoleRoute>} />
+
+          {/* ─── PRIVADA — SOMENTE GESTOR (CRUD do catálogo de tipos de serviço) ─── */}
+          <Route path="tipos-servico" element={<RoleRoute roles={[PERFIL.GESTOR]}><TiposServico /></RoleRoute>} />
         </Route>
 
         {/* ─── ERROS ─── */}

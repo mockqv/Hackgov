@@ -11,6 +11,7 @@ public class TipoServicoResponse {
     private String codigo;
     private String descricao;
     private Integer slaDias;
+    private boolean ativo;
 
     public static TipoServicoResponse from(TipoServico t) {
         return TipoServicoResponse.builder()
@@ -18,6 +19,7 @@ public class TipoServicoResponse {
                 .codigo(t.getCodigo())
                 .descricao(t.getDescricao())
                 .slaDias(t.getSlaDias())
+                .ativo("S".equals(t.getAtivo()))
                 .build();
     }
 }

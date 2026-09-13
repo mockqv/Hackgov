@@ -62,3 +62,11 @@ export const AvaliacaoSchema = z.object({
   nota:       z.number().int().min(1, 'Selecione uma nota').max(5),
   comentario: z.string().max(500).optional().or(z.literal('')),
 })
+
+// ── TIPO DE SERVIÇO (catálogo administrado pelo GESTOR) ─────
+export const TipoServicoSchema = z.object({
+  codigo:    z.string().min(1, 'Código obrigatório').max(30, 'Máximo 30 caracteres'),
+  descricao: z.string().min(3, 'Mínimo 3 caracteres').max(100, 'Máximo 100 caracteres'),
+  slaDias:   z.coerce.number({ invalid_type_error: 'Informe o SLA em dias' })
+               .int().min(1, 'Mínimo 1 dia').max(365, 'Máximo 365 dias'),
+})

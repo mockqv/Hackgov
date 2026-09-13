@@ -53,19 +53,26 @@ export const authApi = {
 }
 
 export const solicitacaoApi = {
-  criar:           (data)     => api.post('/solicitacoes', data),
-  porProtocolo:    (proto)    => api.get(`/solicitacoes/protocolo/${encodeURIComponent(proto)}`),
-  porId:           (id)       => api.get(`/solicitacoes/${id}`),
-  minhas:          ()         => api.get('/solicitacoes/minhas'),
-  mapa:            ()         => api.get('/solicitacoes/mapa'),
-  abertas:         ()         => api.get('/solicitacoes/abertas'),
-  atualizarStatus: (id, data) => api.patch(`/solicitacoes/${id}/status`, data),
-  historico:       (id)       => api.get(`/solicitacoes/${id}/historico`),
-  avaliar:         (id, data) => api.post(`/solicitacoes/${id}/avaliar`, data),
+  criar:              (data)     => api.post('/solicitacoes', data),
+  porProtocolo:       (proto)    => api.get(`/solicitacoes/protocolo/${encodeURIComponent(proto)}`),
+  porId:              (id)       => api.get(`/solicitacoes/${id}`),
+  minhas:             ()         => api.get('/solicitacoes/minhas'),
+  mapa:               ()         => api.get('/solicitacoes/mapa'),
+  abertas:            ()         => api.get('/solicitacoes/abertas'),
+  filaAtendimento:    ()         => api.get('/solicitacoes/fila-atendimento'),
+  atualizarStatus:    (id, data) => api.patch(`/solicitacoes/${id}/status`, data),
+  historico:          (id)       => api.get(`/solicitacoes/${id}/historico`),
+  historicoAuditoria: (id)       => api.get(`/solicitacoes/${id}/historico/auditoria`),
+  avaliar:            (id, data) => api.post(`/solicitacoes/${id}/avaliar`, data),
 }
 
 export const tipoServicoApi = {
-  listar: () => api.get('/tipos-servico'),
+  listar:    ()       => api.get('/tipos-servico'),
+  listarTodos: ()     => api.get('/tipos-servico/todos'),
+  buscar:    (id)      => api.get(`/tipos-servico/${id}`),
+  criar:     (data)    => api.post('/tipos-servico', data),
+  atualizar: (id, data)=> api.put(`/tipos-servico/${id}`, data),
+  inativar:  (id)      => api.delete(`/tipos-servico/${id}`),
 }
 
 export const dashboardApi = {

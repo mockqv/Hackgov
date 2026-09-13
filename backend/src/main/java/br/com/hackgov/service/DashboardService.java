@@ -51,6 +51,24 @@ public class DashboardService {
 
         Double notaMedia = avaliacaoRepo.findAvgNota();
 
+        // % de solicitações concluídas dentro do SLA prometido.
+        Double slaPercentual = null;
+        List<Object[]> slaRows = solicitacaoRepo.slaCumprimento();
+        if (!slaRows.isEmpty() && slaRows.get(0)[1] != null) {
+            long dentroDoPrazo = slaRows.get(0)[0] != null ? ((Number) slaRows.get(0)[0]).longValue() : 0;
+            long totalConcluidoComPrevisao = ((Number) slaRows.get(0)[1]).longValue();
+            if (totalConcluidoComPrevisao > 0) {
+                slaPercentual = Math.round((double) dentroDoPrazo / totalConcluidoComPrevisao * 1000.0) / 10.0;
+            }
+        }
+
+        List<DashboardResponse.RankingBairro> topBairros = solicitacaoRepo.topBairros().stream()
+                .map(r -> DashboardResponse.RankingBairro.builder()
+                        .bairro(r[0].toString())
+                        .quantidade(((Number) r[1]).longValue())
+                        .build())
+                .toList();
+
         return DashboardResponse.builder()
                 .totalSolicitacoes(total)
                 .abertas(abertas)
@@ -59,8 +77,10 @@ public class DashboardService {
                 .canceladas(canceladas)
                 .taxaConclusao(taxa)
                 .notaMediaAvaliacao(notaMedia != null ? Math.round(notaMedia * 10.0) / 10.0 : null)
+                .slaCumpridoPercentual(slaPercentual)
                 .countPorTipo(countTipo)
                 .tempoMedioPorTipo(tempoMedio)
+                .topBairros(topBairros)
                 .build();
     }
 }

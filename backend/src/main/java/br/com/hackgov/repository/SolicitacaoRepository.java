@@ -61,4 +61,29 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
         GROUP BY ts.descricao
         """, nativeQuery = true)
     List<Object[]> avgTempoResolucaoByTipo();
+
+    // Linha única: [quantidade concluída dentro do SLA, total concluído]. Base do
+    // KPI "% SLA cumprido" no dashboard (Parte 4 — estatística aplicada ao negócio).
+    @Query(value = """
+        SELECT
+            SUM(CASE WHEN CAST(s.data_conclusao AS DATE) <= s.data_previsao THEN 1 ELSE 0 END),
+            COUNT(*)
+        FROM solicitacao s
+        WHERE s.status = 'CONCLUIDO'
+          AND s.data_conclusao IS NOT NULL
+          AND s.data_previsao IS NOT NULL
+        """, nativeQuery = true)
+    List<Object[]> slaCumprimento();
+
+    // Top 5 bairros por volume de solicitações — insumo do ranking exibido no dashboard.
+    @Query(value = """
+        SELECT b.nome_bairro, COUNT(*) AS qtd
+        FROM solicitacao s
+        JOIN localizacao l ON s.id_localizacao = l.id_localizacao
+        JOIN bairro b      ON l.id_bairro      = b.id_bairro
+        GROUP BY b.nome_bairro
+        ORDER BY COUNT(*) DESC
+        FETCH FIRST 5 ROWS ONLY
+        """, nativeQuery = true)
+    List<Object[]> topBairros();
 }

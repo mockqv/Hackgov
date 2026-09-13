@@ -13,7 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Deque;
 import java.util.List;
+import java.util.PriorityQueue;
 
 @Service
 @RequiredArgsConstructor
@@ -127,6 +132,33 @@ public class SolicitacaoService {
                 .stream().map(SolicitacaoResumoResponse::from).toList();
     }
 
+    // ── FILA DE ATENDIMENTO (estrutura de dados: fila de prioridade) ──
+    // listarAbertas() devolve as solicitações em ordem de chegada (FIFO puro,
+    // por dataAbertura). Aqui usamos uma java.util.PriorityQueue — uma fila em
+    // que o próximo elemento a "sair" não é o mais antigo, e sim o mais urgente
+    // (menor número de dias restantes até o SLA vencer; valores negativos =
+    // já vencido, saem primeiro). É a estrutura que sustenta o Painel de
+    // triagem do servidor/gestor.
+    @Transactional(readOnly = true)
+    public List<SolicitacaoResumoResponse> filaAtendimento() {
+        List<Solicitacao> abertas = solicitacaoRepo.findTodasAbertas();
+
+        Comparator<Solicitacao> porUrgencia = Comparator.comparingLong(this::diasRestantesSla);
+        PriorityQueue<Solicitacao> fila = new PriorityQueue<>(Math.max(abertas.size(), 1), porUrgencia);
+        fila.addAll(abertas);
+
+        List<SolicitacaoResumoResponse> ordenadaPorUrgencia = new ArrayList<>(fila.size());
+        while (!fila.isEmpty()) {
+            ordenadaPorUrgencia.add(SolicitacaoResumoResponse.from(fila.poll()));
+        }
+        return ordenadaPorUrgencia;
+    }
+
+    private long diasRestantesSla(Solicitacao s) {
+        if (s.getDataPrevisao() == null) return Long.MAX_VALUE;
+        return java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), s.getDataPrevisao());
+    }
+
     // ── ATUALIZAR STATUS (servidor autenticado) ──────────────
     public SolicitacaoDetalheResponse atualizarStatus(Long id, AtualizarStatusRequest req) {
 
@@ -208,11 +240,33 @@ public class SolicitacaoService {
         return SolicitacaoDetalheResponse.from(solicitacaoRepo.save(solic));
     }
 
-    // ── BUSCAR HISTÓRICO ──────────────────────────────────────
+    // ── BUSCAR HISTÓRICO (linha do tempo, mais antigo → mais novo) ──
+    // Usado pela tela pública /acompanhar do cidadão, que desenha um stepper
+    // cronológico (aberto → em análise → ... → concluído).
     @Transactional(readOnly = true)
     public List<HistoricoStatusResponse> buscarHistorico(Long id) {
         return historicoRepo.findBySolicitacaoIdOrderByDataHoraAsc(id)
                 .stream().map(HistoricoStatusResponse::from).toList();
+    }
+
+    // ── PILHA DE AUDITORIA (estrutura de dados: pilha / LIFO) ──
+    // Usada pelo Painel do servidor/gestor, onde o interesse é auditar a
+    // transição MAIS RECENTE primeiro. Em vez de apenas inverter a lista,
+    // empilhamos (push) cada evento em ordem cronológica em um java.util.Deque
+    // usado como pilha, e desempilhamos (pop) ao montar a resposta — o topo da
+    // pilha é sempre a última transição registrada em HISTORICO_STATUS.
+    @Transactional(readOnly = true)
+    public List<HistoricoStatusResponse> buscarHistoricoAuditoria(Long id) {
+        List<HistoricoStatus> cronologico = historicoRepo.findBySolicitacaoIdOrderByDataHoraAsc(id);
+
+        Deque<HistoricoStatus> pilhaAuditoria = new ArrayDeque<>();
+        cronologico.forEach(pilhaAuditoria::push);
+
+        List<HistoricoStatusResponse> maisRecentePrimeiro = new ArrayList<>(pilhaAuditoria.size());
+        while (!pilhaAuditoria.isEmpty()) {
+            maisRecentePrimeiro.add(HistoricoStatusResponse.from(pilhaAuditoria.pop()));
+        }
+        return maisRecentePrimeiro;
     }
 
     // ── AVALIAR SERVIÇO (cidadão autor da solicitação) ───────
