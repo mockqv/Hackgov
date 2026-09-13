@@ -1,5 +1,23 @@
 services:
 
+  # ── ORACLE — banco de dados ─────────────────────────────────
+  oracle-hackgov:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-hackgov
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: hackgov123
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
   # ── BACKEND — Spring Boot ──────────────────────────────────
   backend:
     build:
@@ -10,10 +28,13 @@ services:
       # host 8081 -> container 8080 (8080 do host fica livre pro Oracle APEX/outros)
       - "8081:8080"
     environment:
-      ORACLE_URL: jdbc:oracle:thin:@192.168.0.4:1521/XEPDB1
+      ORACLE_URL: jdbc:oracle:thin:@oracle-hackgov:1521/XEPDB1
       ORACLE_USER: hackgov
       ORACLE_PASS: hackgov123
       SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      oracle-hackgov:
+        condition: service_healthy
     restart: on-failure
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
@@ -34,3 +55,7 @@ services:
       backend:
         condition: service_healthy
     restart: on-failure
+
+volumes:
+  oracle-data:
+    external: true
