@@ -64,6 +64,7 @@ export const solicitacaoApi = {
   historico:          (id)       => api.get(`/solicitacoes/${id}/historico`),
   historicoAuditoria: (id)       => api.get(`/solicitacoes/${id}/historico/auditoria`),
   avaliar:            (id, data) => api.post(`/solicitacoes/${id}/avaliar`, data),
+  exportarCsv:        ()         => api.get('/solicitacoes/exportar', { responseType: 'blob' }),
 }
 
 export const tipoServicoApi = {

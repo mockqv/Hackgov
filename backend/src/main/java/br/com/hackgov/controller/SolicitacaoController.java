@@ -55,6 +55,17 @@ public class SolicitacaoController {
         return ResponseEntity.ok(ApiResponse.ok(service.listarParaMapa()));
     }
 
+    @GetMapping(value = "/exportar", produces = "text/csv")
+    @PreAuthorize("hasRole('CIDADAO')")
+    @Operation(summary = "Exportar as próprias solicitações em CSV (gera trilha de auditoria)")
+    public ResponseEntity<byte[]> exportar() {
+        byte[] csv = service.exportarCsvMinhas().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"minhas-solicitacoes.csv\"")
+                .contentType(MediaType.parseMediaType("text/csv; charset=UTF-8"))
+                .body(csv);
+    }
+
     @GetMapping("/abertas")
     @PreAuthorize("hasAnyRole('SERVIDOR','GESTOR')")
     @Operation(summary = "Painel de triagem do servidor (ordem de chegada)")

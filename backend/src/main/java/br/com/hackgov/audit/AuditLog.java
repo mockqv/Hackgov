@@ -23,8 +23,9 @@ import org.slf4j.MDC;
  * sink externo tipo SIEM), sem se misturar ao log de aplicação padrão.
  *
  * Esta classe cobre os eventos que NÃO passam por HISTORICO_STATUS (que já
- * audita mudança de status nativamente): consulta a dado pessoal de terceiro
- * e exclusão/inativação de registro do catálogo.
+ * audita mudança de status nativamente): consulta a dado pessoal de terceiro,
+ * exclusão/inativação de registro do catálogo, e exportação de dados para
+ * fora do sistema.
  */
 public final class AuditLog {
 
@@ -40,6 +41,11 @@ public final class AuditLog {
     /** Exclusão lógica ou física de um registro (ex.: inativação de Tipo de Serviço). */
     public static void exclusaoRegistro(String recurso, Long idAlvo) {
         registrar("EXCLUSAO_REGISTRO", recurso, idAlvo);
+    }
+
+    /** Exportação de dados para fora do sistema (ex.: CSV de solicitações do cidadão). */
+    public static void exportacaoDados(String recurso, Long idAlvo) {
+        registrar("EXPORTACAO_DADOS", recurso, idAlvo);
     }
 
     private static void registrar(String acao, String recurso, Long idAlvo) {

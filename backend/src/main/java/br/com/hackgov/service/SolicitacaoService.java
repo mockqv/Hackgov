@@ -1,5 +1,6 @@
 package br.com.hackgov.service;
 
+import br.com.hackgov.audit.AuditLog;
 import br.com.hackgov.dto.*;
 import br.com.hackgov.exception.BusinessException;
 import br.com.hackgov.exception.NotFoundException;
@@ -116,6 +117,44 @@ public class SolicitacaoService {
         }
         return solicitacaoRepo.findByCidadaoIdOrderByDataAberturaDesc(principal.getId())
                 .stream().map(SolicitacaoResumoResponse::from).toList();
+    }
+
+    // ── EXPORTAR CSV (cidadão logado, só os próprios dados) ──
+    // Antes, a exportação (US-ARQ-04) rodava inteiramente no cliente, sem round-trip
+    // ao backend — logo sem ponto de auditoria possível. Movida pra cá justamente
+    // para poder registrar quem exportou o quê (AuditLog.exportacaoDados).
+    @Transactional(readOnly = true)
+    public String exportarCsvMinhas() {
+        AuthenticatedUser principal = AuthUtils.require();
+        if (principal.getKind() != AuthenticatedUser.Kind.CIDADAO) {
+            throw new BusinessException("Apenas cidadãos podem exportar as próprias solicitações");
+        }
+        List<SolicitacaoResumoResponse> minhas = listarMinhas();
+
+        StringBuilder csv = new StringBuilder("Protocolo,Tipo,Status,Bairro,Data de abertura,Previsão\n");
+        for (SolicitacaoResumoResponse s : minhas) {
+            csv.append(csvField(s.getProtocolo())).append(',')
+               .append(csvField(s.getTipoDescricao())).append(',')
+               .append(csvField(s.getStatus())).append(',')
+               .append(csvField(s.getNomeBairro())).append(',')
+               .append(csvField(s.getDataAbertura() != null ? s.getDataAbertura().toLocalDate().toString() : ""))
+               .append(',')
+               .append(csvField(s.getDataPrevisao() != null ? s.getDataPrevisao().toString() : ""))
+               .append('\n');
+        }
+
+        AuditLog.exportacaoDados("SOLICITACAO", principal.getId());
+        return csv.toString();
+    }
+
+    // Escapa um campo para CSV: envolve em aspas duplas quando contém vírgula, aspas
+    // ou quebra de linha, dobrando aspas internas — regra padrão do formato CSV (RFC 4180).
+    private String csvField(String value) {
+        if (value == null) return "";
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+        return value;
     }
 
     // ── LISTAR TODAS ABERTAS (servidor/gestor) ───────────────

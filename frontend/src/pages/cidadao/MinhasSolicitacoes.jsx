@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Plus, FileText } from 'lucide-react'
+import { Plus, FileText, Download } from 'lucide-react'
+import { toast } from 'sonner'
 
 import useApi from '../../hooks/useApi'
 import { solicitacaoApi } from '../../lib/api'
@@ -15,6 +17,24 @@ import { formatDate } from '../../lib/format'
 export default function MinhasSolicitacoes() {
   const { data, loading, error, refresh } = useApi(solicitacaoApi.minhas, [])
   const items = data || []
+  const [exportando, setExportando] = useState(false)
+
+  async function exportarCsv() {
+    setExportando(true)
+    try {
+      const blob = await solicitacaoApi.exportarCsv()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'minhas-solicitacoes.csv'
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch {
+      toast.error('Falha ao exportar', { description: 'Tente novamente em instantes.' })
+    } finally {
+      setExportando(false)
+    }
+  }
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-5">
@@ -25,9 +45,16 @@ export default function MinhasSolicitacoes() {
             {items.length} {items.length === 1 ? 'solicitação' : 'solicitações'}
           </p>
         </div>
-        <Link to="/nova-solicitacao">
-          <Button size="sm"><Plus size={13}/> Nova</Button>
-        </Link>
+        <div className="flex gap-2">
+          {items.length > 0 && (
+            <Button variant="secondary" size="sm" onClick={exportarCsv} loading={exportando}>
+              <Download size={13}/> Exportar CSV
+            </Button>
+          )}
+          <Link to="/nova-solicitacao">
+            <Button size="sm"><Plus size={13}/> Nova</Button>
+          </Link>
+        </div>
       </header>
 
       {loading ? (
