@@ -31,7 +31,12 @@ services:
       ORACLE_URL: jdbc:oracle:thin:@oracle-hackgov:1521/XEPDB1
       ORACLE_USER: hackgov
       ORACLE_PASS: hackgov123
-      SPRING_PROFILES_ACTIVE: dev
+      # dev  = tipos de serviço, bairro e usuários de teste
+      # demo = massa de demonstração da Fase 6 (~1.850 solicitações abr–set/2026)
+      SPRING_PROFILES_ACTIVE: dev,demo
+      UPLOADS_DIR: /app/uploads
+    volumes:
+      - uploads-data:/app/uploads
     depends_on:
       oracle-hackgov:
         condition: service_healthy
@@ -59,3 +64,4 @@ services:
 volumes:
   oracle-data:
     external: true
+  uploads-data:
