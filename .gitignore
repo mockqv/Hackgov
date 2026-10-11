@@ -13,3 +13,7 @@ frontend/.env.local
 .DS_Store
 *.log
 .env
+
+# Uploads de fotos (Fase 6)
+uploads/
+backend/uploads/

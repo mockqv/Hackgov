@@ -74,6 +74,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/tipos-servico").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/solicitacoes/mapa").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/solicitacoes/protocolo/**").permitAll()
+                // Fotos dos chamados: leitura pública (aparecem no acompanhamento por protocolo).
+                // Só GET — o envio (POST /api/arquivos) continua exigindo autenticação.
+                .requestMatchers(HttpMethod.GET, "/api/arquivos/*").permitAll()
                 .anyRequest().authenticated()
             )
             .exceptionHandling(eh -> eh
