@@ -1,0 +1,64 @@
+# Conjunto de teste independente da IA de triagem (Fase 6) - formato CLASSE;texto
+# 60 frases escritas à mão em linguagem livre, NUNCA usadas no treino.
+# Serve para medir a generalização fora do padrão do corpus sintético.
+classe;texto
+BURACO;Na Rua Augusta altura do 1500 abriu um buraco que já pegou três carros essa semana
+BURACO;buraco gigante na av perto do posto de gasolina, cuidado
+BURACO;Asfalto todo destruído depois da chuva, parece queijo suíço
+BURACO;Minha moto caiu num buraco que está escondido pela água
+BURACO;Existe uma depressão no pavimento que está aumentando a cada dia
+BURACO;Fizeram obra de esgoto e deixaram a rua cheia de remendos e buracos
+BURACO;O ônibus quebrou a suspensão no buraco da curva
+BURACO;Pista com afundamento perigoso próximo à ponte
+BURACO;Precisamos de recapeamento, a rua inteira está esburacada
+BURACO;Tem uma vala aberta no asfalto sem sinalização nenhuma
+BURACO;Buraco na saída do estacionamento do supermercado
+BURACO;O pneu do meu carro estourou num buraco da avenida principal
+ILUMINACAO;A rua está completamente escura, nenhum poste acende desde domingo
+ILUMINACAO;Lâmpada queimada no poste em frente à padaria
+ILUMINACAO;Poste piscando sem parar, parece festa
+ILUMINACAO;As luzes da praça ficam acesas durante o dia inteiro
+ILUMINACAO;Ficamos sem iluminação pública depois do temporal
+ILUMINACAO;O poste da esquina está apagado e já assaltaram duas pessoas
+ILUMINACAO;Solicito troca de lâmpada, está muito escuro para os pedestres
+ILUMINACAO;Luz do poste muito fraca, quase não ilumina nada
+ILUMINACAO;Iluminação da passarela não funciona à noite
+ILUMINACAO;Refletor do campo de futebol queimado
+ILUMINACAO;Três postes apagados seguidos na mesma quadra
+ILUMINACAO;Poste com a luminária quebrada pendurada
+PODA;A árvore na frente da minha casa está com galhos em cima da fiação elétrica
+PODA;Galho grande quebrou com o vento e está pendurado sobre a calçada
+PODA;Árvore muito alta balançando, tenho medo que caia no telhado
+PODA;Precisa podar a árvore que esconde a placa de pare
+PODA;Uma árvore caiu e está bloqueando metade da rua
+PODA;Árvore morta, sem folhas, com tronco podre
+PODA;Os galhos estão raspando no ônibus e nos caminhões
+PODA;Pedido de poda da árvore da escola, galhos dentro da sala
+PODA;Tronco rachado depois do raio, risco de queda
+PODA;Raízes da figueira estão rachando o muro e a árvore está inclinada
+PODA;Árvore com cupim pode desabar a qualquer momento
+PODA;Galhos cobrindo o poste, a luz não chega na rua
+ENTULHO;Alguém largou um monte de tijolo e cimento na calçada
+ENTULHO;Descarte de móveis velhos na esquina, um guarda-roupa inteiro
+ENTULHO;Terreno ao lado virou depósito de lixo e entulho
+ENTULHO;Despejaram restos de reforma na beira do rio
+ENTULHO;Tem uma pilha de sacos de entulho há quinze dias na rua
+ENTULHO;Jogaram um sofá rasgado e um colchão na praça
+ENTULHO;Lixo de obra abandonado bloqueando a calçada
+ENTULHO;Caçamba transbordando de entulho há semanas
+ENTULHO;Pneus velhos acumulados no terreno, junta mosquito da dengue
+ENTULHO;Restos de construção espalhados na rua sem saída
+ENTULHO;Uma geladeira e um fogão abandonados na calçada
+ENTULHO;Precisamos do cata-bagulho, tem muito material velho na rua
+OUTROS;Calçada com piso solto, minha mãe tropeçou e caiu
+OUTROS;Bueiro entupido, a rua alaga com qualquer chuva
+OUTROS;Semáforo do cruzamento está desligado desde cedo
+OUTROS;Placa de rua caída no chão
+OUTROS;Mato muito alto no canteiro, tem até rato
+OUTROS;Vazamento de água na calçada há uma semana
+OUTROS;Pichação no monumento da praça
+OUTROS;Faixa de pedestre totalmente apagada na frente do hospital
+OUTROS;Ponto de ônibus sem banco e sem cobertura
+OUTROS;Boca de lobo sem grade, perigo para crianças
+OUTROS;Animal morto na rua exalando mau cheiro
+OUTROS;Brinquedo do parquinho quebrado, criança se machucou

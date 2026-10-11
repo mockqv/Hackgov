@@ -1,0 +1,625 @@
+# Corpus rotulado da IA de triagem do HackGov (Fase 6) - formato CLASSE;texto
+# Frases sintéticas com vocabulário típico de chamados de zeladoria (registro formal e informal,
+# erros de digitação, frases curtas) + exemplos difíceis/ambíguos escritos à mão.
+# Em produção, este arquivo é substituído/ampliado pela base histórica real de chamados já triados.
+classe;texto
+ILUMINACAO;Solicito manutenção da iluminação pública. A lâmpada da esquina parou de funcionar.
+BURACO;Rua de terra cheia de crateras, carro não passa
+ENTULHO;Alguém abandonou restos de obra embaixo do viaduto durante a noite.
+BURACO;Asfalto afundou
+BURACO;Depois do conserto do vazamento deixaram a vala aberta no asfalto
+OUTROS;O bueiro do bairrro está entupido há semaas.
+OUTROS;Um vazamento de água não para há dias.
+OUTROS;gente a placa de pare foi arrancada
+OUTROS;Precisa de reparo. O mato do terreno baldio precisa de capinação.
+PODA;Com o vento pode cair em cima de alguém: um galho enorme está com cupim e oco por dentro.
+ENTULHO;Tem lixo acumulado na praça faz dias.
+ILUMINACAO;oi a lampada aqui queimou de novo ta muito escuor
+OUTROS;a rua em frente ao mercado fica com enxurrada fote desde a chuva.
+PODA;Depois da chuva a sibipiruna ficou pendurado sobre um carro.
+OUTROS;Solicito vistoria. A boca de lobo não escoa a água da chuva.
+ENTULHO;Favor recolher. Móveis velhos no terreno baldio.
+ILUMINACAO;Postes da rua apagados
+PODA;pessoal a arvore aqui ta nos fios alguem vem podar
+PODA;A copa da árvore está bloqueando a placa de trânsito e quando venta os galhos batem na janela.
+PODA;A mangueira precisa de poda e ninguém consegue passar pela calçada.
+ILUMINACAO;Viela muito escura, nenhum poste funcionando
+PODA;Depois da chuva a árvore tombou sobre um carro.
+BURACO;gente o buraco perto do ponto de ônibus ta cada vez maior depois da obra da Sabesp alguem resolve pfv
+BURACO;à noite não dá pra ver e o carro cai direto por causa de um buracão perto do ponto de ônibbus.
+OUTROS;O mato do terreno baldio está com cobras. Pedimos manutenção.
+ILUMINACAO;oi o poste aqui queimou de novo faz tempo alguem troca al ampada
+ILUMINACAO;Luz do poste piscando
+ENTULHO;oi largaram lixo na praça ta fedendo
+ENTULHO;Tem sacos de lixo no canteiro central.
+OUTROS;Precisa de reparo. A calçada afundou.
+PODA;O pinheiro cresceu demais e cobre a rua e na última tempestade quase caiu.
+OUTROS;O banco da praça perto da escola está quebrado faz tempo.
+PODA;gente o galhao ta rachada venta e balança tudo
+ENTULHO;Colchão e sofá abandonados bloqueando a calçada
+ENTULHO;Abandonaram um colchão na beira da estrada e tem foco de dengue com água parada. Precisa do cata-bagulho.
+ENTULHO;oi jogaram entulho na praça  d novo
+ENTULHO;Está juntando rato e barata por causa de entulho do lado do córrego.
+ILUMINACAO;está tudo escuro na paça: a lâmpada do poste está sem funcionar.
+PODA;Galhos encostando na fiação
+ILUMINACAO;Está tudo escuro na rua: o refletor da praça não acende.
+OUTROS;gente o muro da escola está todo pichado ta perigoso
+OUTROS;Peço que a equipe responsável resolva. A rua fica com enxurrada forte.
+ENTULHO;descartaram um monte de entulho not erreno baldio e tem foco de dengue com água  parada.
+OUTROS;gente a faixa de pedestre está apagada ninguem resolve
+OUTROS;Solicito providências. A rua fica com enxurrada forte.
+ILUMINACAO;Está tudo escuro na quadra: o refletor da praça não acende.
+BURACO;Já estourou o pneu de dios carros por causa de asfalto cedend operto do ponto de ônibus.
+ENTULHO;Cadeirante não consegue passar por causa de tijolos e areia na esquina.
+BURACO;Os ônibus passam raspando por causa de vários buracos na rua.
+ILUMINACAO;iluminação pública apagda
+BURACO;gente esse buraco na entrada da garagem ta cada vez maior alguem resolve pfv
+ENTULHO;Solicito a remoção do entulho. Entulho na viela.
+ILUMINACAO;A luz da ruaa quimou há mais de um mês.
+ENTULHO;Tem foco de dengue com água parada por causa de tijolos e areia no canteiro central.
+OUTROS;oi o parquinho da praça está com brinquedos quebrados
+OUTROS;Mato alto tomando conta da praça
+BURACO;Alguém precisa consertar isso. Um buraco enorme na faixa da direita.
+PODA;Depois da chuva a árvore da calçada tombou sobre a calçada.
+ILUMINACAO;oi o poste aqui ta apagado desde a chuva ta muito escuro
+BURACO;O asfalto todo esburacado na pista sentido centro, à noite não dá pra ver e o carro cai direto. Alguém precisa consertar isso.
+OUTROS;Solicito vistoria. Um animal morto está na via.
+ENTULHO;Tem um sofá velho do lado do córrego. Precisa do cata-bagulho.
+ENTULHO;Abandonaram madeira e ferro velho na viela e cadeirante não consegue passar. Precisa do cata-bagulho.
+ILUMINACAO;As crianças voltam da escola no escuro porque a iluminação da quadra não acende.
+PODA;Depois da chuva um galho enorme caiu em cima do muro.
+ENTULHO;Alguém despejou restos de obra na esquina durante a noite.
+ILUMINACAO;Já teev assalto por causa do escuro porque o poste vive queimado.
+PODA;pessoal o galhao ta nos fios venta e balança tudo
+ILUMINACAO;As crianças voltam da escola no escuro porque a luz do poste está muito fraca.
+BURACO;Tem uma cratera na entrada da garagem há duas semanas. Solicito recuperação do asfalto.
+ILUMINACAO;Luminária pendurada pelo fio, pode cair
+OUTROS;A calçada afundou. Precisa de reparo.
+ILUMINACAO;Está tudo escuro na rua: a iluminação pública fica piscando a noite toda.
+OUTROS;um vazamento de água da minha ru está desperdiçando água limpa ddesde a chuva.
+PODA;gente o galhao ta pra cair venta e balança tudo
+BURACO;Solicito recuperação do asfalto. Uma rachadura grande no asfalto em frente à escola faz mais de um mês.
+BURACO;Asfalto cedeu an pista
+OUTROS;Semáforo apagado no cruzamento, trânsito confuso
+ILUMINACAO;Peço a troca do reator. O poste queimou.
+PODA;Peço a supressão da árvore condenada. A sibipiruna caiu sobre a calçada.
+ILUMINACAO;A lâmpada do poste queimou faz quinze dias.
+BURACO;O asfalto cedeu na entrada da garagem e motoqueiro já caiu aí.
+PODA;O eucalipto está com cupim e oco por dentro e ninguém consegue passar pela calçada. Pedimos avaliação e poda da árvore.
+ILUMINACAO;as crianças voltam da escola no escuro porque a luz do poste está quebrad.
+ENTULHO;Solicito a coleta do material. Sacos de lixo na viela.
+ENTULHO;Alguém jogou uma geladeira velha na beira da estrada durante a noite.
+ILUMINACAO;Está tudo escuro na viela: a luz da rua está muito fraca.
+BURACO;Buracos em sequência na curva, o risco de aicdente é grande. Solicito recuperação do asfaltoo.
+BURACO;Buraco fundo na faixa da direita
+BURACO;O asfalto rachou todo  perto do ponto de ônibus desde o recapeamento mal feito e já estouou o pneu de dois carros.
+ENTULHO;genet jogaram entulho no terrenob aldio outra vez
+PODA;Galhos da árvore cobrem a lâmpada do poste e a calçada fica escura
+ILUMINACAO;Luz da praça não acende e o local virou ponto de assalto
+ENTULHO;Caçamba abandonada
+BURACO;O asfalto abriu na entrada da garagem há meses e o risco de acidente é grande.
+ILUMINACAO;Solicito manutenção da iluminação pública. O poste da esquina não acende.
+ILUMINACAO;oi a luz do poste aqui queimou de novo
+OUTROS;o semáforo está com deeitto. peço que a equipe responsável resolva.
+PODA;Com o vento pode cair em cima de alguém: a figueira está com um galho quebrado pendurado.
+BURACO;Os carros desviam pela contramão por causa de buracos em sequência na esquina com a Rua Sete.
+ILUMINACAO;A rua fica um breu à noite porque a iluminação da viela está sem funcionar.
+BURACO;O asfalto soltou em placas na frente do mercado desde as últimas chuvas e motoqueiro já caiu aí.
+ILUMINACAO;Está tudo escuro na rua: a luminária está sem funcionar.
+ENTULHO;Está atraindo escorpiião por causa de madeira e ferro velho na beira da estrada.
+PODA;Galho quebrado pendurado
+ENTULHO;Pneus descartados na praça
+OUTROS;Solicito providências. O bueiro está entupido.
+BURACO;Pedimos recapeamento da via. Asfalto cedendo na curva desde as últimas chuvas.
+BURACO;O trânsito fica parado por causa do desvio por causa de um rombo no asfalto na faixa da direita.
+BURACO;Favor tapar o buraco. O asfalto todo esburacado na pistaa sentido centro.
+BURACO;gente o buraco em frente à escola ta cada vez maior vai acontecer acidente
+OUTROS;gentea rua fica com enxurrada forte ta perigoso
+PODA;Soliciito poda. A figueira está bloqueando a placa de trânssito.
+PODA;A árvore em frente de casa está inclinada e pode cair. Precisa de poda de limpeza.
+OUTROS;gente o mato do terreno baldio está muito alto
+BURACO;O asfalto abriu na saída do viaduto há duas semanas e a roda do meu carro entortou.
+OUTROS;Ponto de ônibus com a cobertura caída
+ILUMINACAO;A lâmpada da esquina está muito fraca e a escuridão facilita roubo.
+OUTROS;a calçada setá esburacada e idsos tropeçam.
+ILUMINACAO;A luz do poste está apagada.
+PODA;Solicito vistoria de um agrônomo. O eucalipto está com cupim e oco por dentro.
+ENTULHO;Terreno virou lixão, jogam entulho todo dia
+ENTULHO;Despejaram um colchão na praça e bloqueia a passagem de pedestres.
+ENTULHO;Está juntando rato e barata por causa de restos de obra embaixo do viaduto.
+PODA;Precisa de poda de lipeza.Uma árvore seca precisa de poda.
+ILUMINACAO;A lâmpada do post fica acesa durante o dia e os moradores estão com medo de sair à noite.
+ILUMINACAO;Precisa de reparo no poste. O poste em frente ao número 85 está muito fraco.
+PODA;Depois da chuva a árvore quebrou sobre um carro.
+ENTULHO;Virou ponto de descarte irregular por causa de um colchão em frente ao número 230.
+ILUMINACAO;O poste fica piscando a noite toda. Pedimos a religação da iluminação.
+PODA;Galhos baixos batendo nos ônibus que passam
+ILUMINACAO;Ninguém enxerga a calçada à noite porque a luz do poste fica piscando a noite toda.
+BURACO;Um rombo no asfalto no cruzamento, o risco de acidente é grande. Favor tapar o buraco.
+ILUMINACAO;iluminaçã púbblica apagada
+OUTROS;Pichação no muro
+PODA;A copa da árvore está encostando nos fios e é um risco para quem passa.
+OUTROS;Lixeira da praça sempre cheia, precisa de mais coleta
+ENTULHO;Solicito a remoção do entulho. Um colchão no canteiro central.
+ILUMINACAO;Poste inclinado depois que um caminhão bateu, lâmpada apagada
+ENTULHO;Pedimos a retirada. Sacos de lixo na viela.
+OUTROS;Placa de rua apagada, ninguém consegue ler o nome
+ILUMINACAO;Está tudo escuro na praça: a luz da rua está sem funcionar.
+BURACO;Pedimos recapeamento da via. Um buraco que só aumenta na curva.
+ILUMINACAO;Está tudo escuro na praça: a lmâpada da esquina paruo de funcionar.
+ENTULHO;Abandonaram lixo acumulado na esquina e está juntando rato e barata. Solicito a remoção do entulho.
+ILUMINACAO;Está tudo escuro na rua: a luz da rua acende e apaga.
+ENTULHO;oi jogaram etulho na calçada uotra vez
+PODA;Precisa de poda de limpeza. O eucalipto está tampando a luz do poste.
+ENTULHO;Abandonaram uma caçamba lotada na beira da estrada e bloqueia a passagem de pedestres. Solicito a coleta do material.
+BURACO;Remendo do asfalto soltou e voltou a abrir o buraco
+PODA;gente o galhao ta nos fios
+ILUMINACAO;Está tudo escuro na praça: o poste está quebrado.
+OUTROS;gente a lixeira pública está quebrada ta perigoso
+ILUMINACAO;oi a lampada aqui ta apagado de novo
+PODA;Depois da chuva a árvore em frente de casa ficou pendurado sobre a calçada.
+OUTROS;oi o muro da escola foi pichado de novo
+BURACO;gente a cratera na pista sentido centro ta cada vez maior ninguem faz nada
+PODA;Com o vento pod cai rem cima de alguém: o pinheiro precisa de poda.
+ENTULHO;Alguém abandonou um colchão na praça durante a noite.
+BURACO;Peço a operação tapa-buraco. Um rombo no asfalto na entrada da garagem.
+OUTROS;Favor verificar. Um vazamento de água está desperdiçando água limpa.
+BURACO;Pedimos recapeamento da via. Um buraco que só aumenta no meio da pista.
+ENTULHO;alguém despejou rrestos de  obra no terreno baldio durante a noite.
+BURACO;gente a cratera no meio da pista ta cada vez maior faz uns dez dias vai acontecer acidente
+PODA;A sibipiruna está encostando nos fios e quando venta os galhos batem na janela.
+BURACO;Bueiro afundado no meio da rua virou um buraco perigoso
+ILUMINACAO;A luminária queimou desde sábado.
+ENTULHO;Jogaram restos de construção no canteiro central e está fedendo muito.
+ENTULHO;Solicito a remoção do entulho. Lixo acumulado no terreno baldio.
+BURACO;gente esse buraco na entrada da garagem ta cada vez maior há duas semanas ninguem faz nada
+ILUMINACAO;Iluminação pública apagada
+PODA;A figueira está com cupim e oca por dentro. Pedimos a remoção dos galhos.
+PODA;Folhas e galhos da árvore entupindo a calha da casa
+ILUMINACAO;precisa e reparo no poste. o poste da esquina acend ee apaga.
+PODA;A árvore cresceu demais e cobre a rua. Precisa de poda de limpeza.
+OUTROS;Calçada toda quebrada e com buracos, idosos tropeçam
+OUTROS;Solicito providências. A calçada está esburacada e idosos tropeçam.
+ILUMINACAO;Está tudo escuro na rua: a iluminação da quadra está apagada.
+BURACO;Um desnível perigoso no pavimento na pista sentido centro, à noite não dá pra ver e o carro cai direto.
+ILUMINACAO;A lâmpada do poste queimou há uma semana. Pedimos manutenção na iluminação.
+PODA;Um galho enorme está encostando nos fios. Pedimos avaliação e poda da árvore.
+OUTROS;oi a calçada está com o piso solto alguem ve isso
+ENTULHO;Tem uma caçamba lotada na viela faz dias. Pedimos fiscalização e limpeza do local.
+ILUMINACAO;Fiação do poste de iluminação exposta e luz apagada
+PODA;Precisa de poda de limpeza. Um galho enorme está encostando nos fios.
+ENTULHO;Pedimos fiscalização e limpeza do local. Um sofá velho na calçada.
+ILUMINACAO;A rua fica um breu à noite porque a luz da rua acende e apaga.
+PODA;gente essa arvore ta pra cair
+PODA;Árvore seca na calçada
+ENTULHO;Despejaram uma caçamba lotada no canteiro central e virou ponto de descarte irregular. Favor recolher.
+OUTROS;Solicito vistoria. A placa de pare caiu.
+ILUMINACAO;oi a luz do poste aqui ta apagado de novo perigoso a noite
+PODA;Precisa podar a árvore
+OUTROS;A tampa do poço de visita está quebrada e faz barulho. Peço que a equipe responsável resolva.
+OUTROS;A faixa de pedestre sumiu depois do recapeamento.
+PODA;gente a arvore aqui ta seca perigo
+BURACO;Pedimos recapeamento da via. Um rombo no asfalto na entrada da garagem há meses.
+PODA;Árvore morta na praça, com galhos secos caindo
+OUTROS;gente um animal morto está apodrecendo na calçada
+ILUMINACAO;A luminária queimou há uma semana. Pedimos manutenção na iluminação.
+ENTULHO;oi largaram um sofa na praça outar vez
+BURACO;Tem um afundamento no asfalto na saída do viaduto depois da obra da Sabesp. Peço a operação tapa-buraco.
+BURACO;pdimos recapeamento da via. um buraco na frente do mercado há meses.
+ILUMINACAO;A luz darua apagou depois da hcuva e é desperdício de energia de dia. Solicito a troca da lâmpada.
+OUTROS;Ponto de ônibus sem cobertura
+PODA;Depois da chuva a árrvore quebrou sobre  acalçada.
+OUTROS;Precisa de reparo. O bueiro está entupido.
+ILUMINACAO;Não dá pra ver quem está na rua à noite porque o refletor da praça está muito fraco.
+PODA;gente essa arvore ta rachada
+OUTROS;O muro da escola foi pichado de novo. Precisa de reparo.
+OUTROS;O muro da escola está todo pichado. Pedimos manutenção.
+BURACO;Favor tapar o buraco. Um buraco que só aumenta na frente do mercado há duas semanas.
+OUTROS;Solicito providências. A calçada está com o piso solto.
+ENTULHO;Moradores de rua deixaram sacos e restos de móveis na calçada
+ENTULHO;Restos da poda foram deixados na calçada há semanas
+ENTULHO;Despejaram sacos de lixo em frente ao número 230 e tem foco de dengue com água parada. Pedimos fiscalização e limpeza do local.
+BURACO;Tem uma cratera na faixa da direita há duas semanas. Solicito recuperação do asfalto.
+ILUMINACAO;Os postes da avenida não acendem
+PODA;Depois da chuva uma árvore seca caiu sobre um carro.
+BURACO;Tem um rombo no asfalto na esquina com a Av. Brasil depois da obra da Sabesp. Alguém precisa consertar isso.
+ILUMINACAO;Já teve assalto por causa do escuro porque a luminária está quebrada.
+PODA;Favor remvoer aárvore seca. Uma árvore seca está invadindo o quintal.
+BURACO;gente o buraco na curva ta cada vez maior vai acontecer acidente
+ILUMINACAO;Está tudo escuro na praça: a luz da rua está quebrada.
+ENTULHO;Solicito a remoção do entulho. Uma caçamba lotada na esquina.
+ILUMINACAO;Está tudo escuro na viela: a lâmpada da esquina apagou depois da chuva.
+PODA;árvoe cm cupim
+ENTULHO;oi jogaram um sofa na beira da estrad outra vez
+ENTULHO;gente jogaram restos de obra na beira da estrada ta fedendo
+OUTROS;gente o bueiro está sem tampa
+ENTULHO;Está fedendo muito por causa de um sofá veloh no terreno baldio.
+ENTULHO;Alguém deixou restos de obra na beira da estrada durante a noite.
+PODA;oi a arvore aqui ta seca perigo
+PODA;O ipê da praça está invadindo o quintal. Pedimos a remoção dos galhos.
+PODA;Poda urgente
+PODA;Ninguém consegue passar pela calçada: uma árvore seca está encostando nos fios.
+BURACO;Tem um rombo no asfalto na entrada da garagem há meses. Precisa de tapa-buraco urgente.
+OUTROS;A lixeira pública foi arrancada. Solicito vistoria.
+PODA;O ipê da praça está encostando nos fios e quando venta os galhos batem na janela.
+ENTULHO;Despejaram lixo acumulado em frente ao número 230 e está juntando rato e barata. Pedimos a retirada.
+ENTULHO;Descartaram pneus velhos no terreno baldio e está atraindo escorpião.
+ILUMINACAO;oi a lampada aqui fica piscando
+BURACO;Buracos em sequência na faixa da direita, um ciclista se machucou.
+BURACO;tem um rombo noa sfalto no meiod a pista.
+BURACO;Um buracão logo depois da lombada, quando chove enche de água e ninguém vê o buraco.
+OUTROS;A placa de pare foi arrancada. Pedimos manutenção.
+PODA;pessoal essa arvore ta pra cair alguem vem podar
+OUTROS;A calçada afundou. Favor verificar.
+PODA;Árvore tombou e bloqueou a rua inteira depois do temporal
+PODA;Remoção de árvore
+ENTULHO;gente jogaram entulho em frente ao número 230
+BURACO;Buraco no asfalto cheio de água parada, carros caem sem ver
+ENTULHO;Solicito a remoção do enulho Lixo acumulado na viela.
+ENTULHO;Toda semana jogam mais por causa de uma geladeira velha na praça.
+OUTROS;O parquinho da praça em frente ao mercado está abandonado desde a chuva.
+ILUMINACAO;Precisa de reparo no poste. A luminária queimou.
+BURACO;Tem um buraco enorme na rua faz mais de um mês. Favor tapar o buraco.
+ILUMINACAO;oi a luz do poste aqui fica piscando alguem troca a lampada
+BURACO;O risco de acidente é grande por causa de um afundamento no asfalto no meio da pista.
+OUTROS;A faixa de pedestre setá apagada.
+PODA;A figueira está inclinada e pode cair e é um risco para quem passa. Favor remover a árvore seca.
+PODA;Depois da chuva a mangueira tombou no meio da rua.
+ENTULHO;Abandonaram tijolos e areia na esquina e virou ponto de descarte irregular. Favor recolher.
+PODA;A árvore da calçada está inclinada e pode cair. Favor remover a árvore seca.
+BURACO;Buraco na rua
+BURACO;A Sabesp abriu a rua e não fechou direito, ficou um buraco
+OUTROS;O ponto de ônibus está com o abrigo quebrado.
+ILUMINACAO;oi a lampada aqui fica piscando de novo
+BURACO;Asfalto afundou perto da tampa do esgoto e os carros batem
+BURACO;O asfalto afundou em frente à escola há meses e os ônibus passam raspando.
+OUTROS;gente o mato do terreno baldio está com cobras
+BURACO;Um buraco enorme na faixa da direita, já estourou o pneu de dois carros. Pedimos recapeamento da via.
+ENTULHO;Bloqueia a passagem de pedestres por causa de tijolos e areia na viela.
+ILUMINACAO;Poste caído na calçada depois da chuva
+ENTULHO;Cata bagulho
+OUTROS;lixera querbada
+ILUMINACAO;a rua fica um breu à noite porque o poste está muito raco.
+ENTULHO;Jogaram restos de obra dentro do buraco do terreno
+OUTROS;oi  a faixa de pedestre stá apagada alguem ve isso
+PODA;pessoal a arvore aqui ta pra cair perigo
+PODA;A figueira caiu sobre a calçada. Peço a supressão da árvore condenada.
+OUTROS;oi o banco da praça está quebrado alguem ve isso
+OUTROS;Mato alto no terreno
+ENTULHO;Abandonaram um colchão do lado do córrego e toda semana jogam mais. Pedimos a retirada.
+PODA;Depois da chuva a árvore em frente de casa caiu em cima do muro.
+OUTROS;oi o ponto de ônibus está sem cobertura ninguem resolve
+BURACO;Solicito reparo no asfalto. Um buraco fundo logo depois da lombada faz uns dez dias.
+OUTROS;A calçada do bairro está toda quebrada há semanas.
+OUTROS;Um animal morto da minha rua está na via.
+BURACO;Os ônibus passam raspando por causa de uma panela no asfalto na esquina com a Rua Bahia.
+ENTULHO;Precisa do cata-bagulho. Um sofá velho na calçada.
+OUTROS;O banco da praça foi depredado. Peço que a equipe responsável resolva.
+OUTROS;Pedimos manutenção. A placa de pare está entortada.
+ENTULHO;Descartaram uma televisão velha e fios no canteiro
+OUTROS;Capinação do canteiro
+BURACO;gente a cratera em frente à escola ta cada vez maior
+PODA;Solicito poda. A árvore está inclinada e pode cair.
+BURACO;Lombada quebrada virou buraco no asfalto
+PODA;Pedimos a remoção dos galhos. A mangueira precisa de poda.
+OUTROS;Solicito providências. O ponto de ônibus está sem cobertura.
+OUTROS;Bueiro sem tampa na calçada, alguém pode cair
+OUTROS;Rua alaga sempre que chove, falta boca de lobo
+OUTROS;Lixeira quebrada
+ILUMINACAO;Troca de lâmpada
+ILUMINACAO;Está tudo escuro na viela: a luz do poste fica acesa durante o dia.
+OUTROS;Um vazamento de água do bairro está alagando a rua.
+BURACO;Rua esburacada
+ENTULHO;Tem foco de dengue com água parada por causa de restos de obra na viela.
+OUTROS;O muro da escola foi pichado de novvo. Solicito vistoria.
+ILUMINACAO;Os moradores estão com medo de sair à noite porque a lâmpada da esquina está muito fraca.
+ENTULHO;Alguém deixou um sofá velho no terreno baldio durante a noite.
+ILUMINACAO;O poste queimou e a rua fica um breu à noite. Pedimos manutenção na iluminação.
+OUTROS;Brinquedo do parquinho quebrado com ferro exposto
+PODA;Peço a supressão da árvore condenada. A árvore da calçada está bloqueando a placa de trânsito.
+ILUMINACAO;Já teve assalto por causa do escuro porque o poste está sem funcionar.
+BURACO;Precisa refazer o pavimento. Um rombo no asfalto na saída do viaduto desde o recapeamento mal feito.
+ILUMINACAO;O poste da esquina fica aceso durante o dia há mais de um mês.
+PODA;Árvore encostando na rede elétrica soltando faísca
+OUTROS;gente um vazamennto de áágua está desperdiçando água limpa
+ILUMINACAO;Ruaae scura, poste não acende
+PODA;Uma árvore seca cresceu demais e cobre a rua. Favor remover a árvore seca.
+ENTULHO;Está fedendo muito por causa de tijolos e areia no terreno baldio.
+OUTROS;O bueiro em frente ao mercado está entupido fazt empo.
+OUTROS;O semáforo em frente ao mercadoo está apagado desde a  chuva.
+BURACO;Tem um buraco que só aumenta na frente do mercado. Peço a operação tapa-buraco.
+BURACO;Uma valeta funda na pista no meio ad pista, está danificando a suspensão dos carros. Favor tapa ro buraco.
+ENTULHO;Está atraindo escorpião por causa de sacos de lixo na esquina.
+ENTULHO;alguém desspejou restos de obra no canteiroo central durante a noite.
+ENTULHO;oi largaram restos de obra na praça
+OUTROS;Calçada sem acessibilidade, rampa quebrada
+ENTULHO;Bloqueia a passagem de pedestres por causa de sacos de lixo em frente ao número 230.
+ENTULHO;Pedimos fiscalização e limpeza do local. Um colchão no canteiro central.
+ENTULHO;Jogaram lixo acumulado na viela e bloqueia a passagem de pedestres. Pedimos a retirada.
+OUTROS;Faixa de pedestre apagada em frente à escola
+ENTULHO;Abandonaram entulho no canteiro central e está atraindo escorpião.
+OUTROS;O banco da praça está quebrado.
+PODA;A sibipiruna está com cupim e oca por dentro e pode cair em cima dos carros estacionados. Solicito vistoria de um agrônomo.
+BURACO;gente esse buraco na saída do viaduto ta cada vez maior depois da obra da Sabesp
+OUTROS;A lixeira pública perto da escola está sempre transbordando.
+PODA;O pinheiro caiu sobre a calçada e quando venta os galhos batem na janela. Precisa de poda de limpeza.
+ILUMINACAO;A luz do poste fica piscando a noite toda há uma semana. Precisa de reparo no poste.
+ENTULHO;Cadeirante nã oconsegue passar por causa de uma caçamba lotada na viela.
+ENTULHO;Bloqueia a passagem de pedestres por causa de pneus velhos em frente ao número 230.
+OUTROS;O muro da escola foi pichado de novo. Solicito providências.
+ENTULHO;Precisa do cata-bagulho. Lixo acumulado na viela.
+PODA;Copa da árvore tampando o semáforo, motoristas não enxergam
+OUTROS;Pedimos  manutenção. A boca de lobo está quebrada.
+BURACO;tem um buraco que só aumenta na entrada da gaaragem há mees.
+OUTROS;O semáforo está apagado. Peço que a equipe responsável resolva.
+PODA;Poda de árvore
+BURACO;Uma rachadura grande no asfalto na curva, já estourou o pneu de dois carros.
+OUTROS;A calçada está toda quebrada. Pedimos manutenção.
+ENTULHO;Ponto viciado de descarte
+ILUMINACAO;A lâmpada do poste está acesa o dia todo, desperdício
+PODA;Depois da chuva o eucalipto caiu no meio da rua.
+OUTROS;Vazamento de água na rua
+ENTULHO;Cadeirante não consegue passar por causa de um monte de entulho embaixo do viaduto.
+ILUMINACAO;Peço a troca do reator. O refletor da praça queimou.
+BURACO;Um buraco enorme na frente do mercado, motoqueiro já caiu aí.
+ILUMINACAO;Está tudo escuro na praça: a lâmpada do poste está muito fraca.
+BURACO;Pista cheia de buarrcos
+ENTULHO;Alguém abandonou restos de construção na calçada durante a noite.
+ENTULHO;Jogaram sacos de lixo na calçada e toda semana jogam mais.
+ENTULHO;Remoção de entulho
+ENTULHO;Pedimos fiscalização e limpeza do local. Telhas quebradas no terreno baldio.
+ENTULHO;oi lragaram entulho na viela den ovo
+PODA;O eucalipto está com o tronco rachado e é um risco para quem passa. Peço a supressão da árvore condenada.
+PODA;Árvore tombou com o vento
+PODA;Ninguém consegue passar pela calçada: a mangueira está invadindo o quintal.
+BURACO;gente esse buraco no meio da pista ta cada vez maior alguem resolve pfv
+BURACO;Tem o asfalto todo esburacado na pista sentido centro.
+OUTROS;O muro da escola da minha rua foi pichado de novo faz tempo.
+OUTROS;Fio solto da rede elétrica caído na calçada
+BURACO;Um buraco fundo no meio da pista, o risco de acidente é grande.
+ILUMINACAO;Está tudo escuro na viela: o poste em frente ao número 85 queimou.
+ENTULHO;Abandonaram um colchão embaixo do viaduto e bloqueia a passagem de pedestres.
+ILUMINACAO;oi a lampada aqui ta apagado faz tempo alguem troca a lampada
+ILUMINACAO;oi o poste aqui fica piscando ta muito escuro
+ENTULHO;Pedimos a retirada.. Pneus velos no terreno baldio.
+OUTROS;gente a lixeira pública foi arrancada
+ENTULHO;Tem sacos de lixo em frente ao número 230 há semanas. Solicito a coleta do material.
+ILUMINACAO;Está perigoso voltar a pé à noite porque a lâmpada do poste está sem funcionar.
+BURACO;Vários buracos na rua, a roda do meu carro entortou. Precisa refazer o pavimento.
+ILUMINACAO;Está tudo escuro na rua: a luz do poste está muito fraca.
+ILUMINACAO;Lâmpada do poste em frente ao hospital queimada
+ENTULHO;gente largaram restos de obra no terreno baldio ta fedendo
+ILUMINACAO;Lâmpada queimada
+PODA;A copa da árvore caiu sobre a calçada. Pedimos avaliação e poda da árvore.
+OUTROS;oi a boca de loboo está quebrada ta perigoso
+PODA;Árvore caiu em cima do poste e a rua ficou sem luz
+PODA;Depois da chuva a copa da árvore caiu no meio da rua.
+PODA;pesssoal o galhao tta rachada alguem vem podar
+ILUMINACAO;Lâmpada queemiada
+BURACO;gente o buraco logo depois da lombada ta cada vez maior alguem ressolvepfv
+PODA;Depois da chuva a sibipiruna quebrou sobre um carro.
+OUTROS;A placa de pare da minha rua foi arrancada.
+ILUMINACAO;É desperdício de energia de dia porque a luz da rua apagou depois da chuva.
+ENTULHO;toda semana jogam mais por causa de um monte de etulho no terreno baldio.
+OUTROS;oi a placa de pare foi arrancada
+ENTULHO;pedimos fiscalização e limpeza do local. telhas  quebradas embaixo do viaduto.
+BURACO;gente esse buraco logo depois da lobada ta cada vez maior
+ILUMINACAO;oi a luz do poste aqui fica piscando de novo
+ENTULHO;deixaram tijolos e areia na praça e está attraindo escopião. favor recolher.
+ENTULHO;Despejaram sacos de lixo do lado do córrego e tem foco de dengue com água parada. Pedimos fiscalização e limpeza do local.
+ILUMINACAO;Pedimos a religação da iluminação. A lâmpada do poste acende e apaga.
+ILUMINACAO;Está tudo escuro na praça: o poste da esquina está muito fraco.
+ENTULHO;Favor recolher. Restos de construção na calçada.
+ENTULHO;Alguém abandonou entulho no terreno baldio durante a noite.
+PODA;Depois da chuva a mangueira tombou sobre um carro.
+ILUMINACAO;A iluminação pública queimou e está perigoso voltar a pé à noite.
+OUTROS;A tampa do poço de visita perto da escola está solta faz tempo.
+PODA;A sibipiruna caiu sobre a calçada e com o vento pode cair em cima de alguém. Pedimos avaliação e poda da árvore.
+PODA;o pinheiro está secoe  oferece risco e pode cair em cima dos carros estacionados.
+PODA;O ipê da praça caiu sobre a calçada.
+PODA;pessoal a arvore aqui ta rachada
+ENTULHO;Descartaram madeira e ferro velho no canteiro central e está atraindo escorpião.
+OUTROS;oi a placa de pare está entortada alguem ve isso
+PODA;A árvore está com o tronco rachado.
+BURACO;Um buraco enorme na saída do viaduto, a roda do meu carro entortou. Solicito recuperação do asfalto.
+PODA;Ninguém consegue passar pela calçada: uma árvore seca caiu  sobre a calçada.
+PODA;gente essa  arvore ta nos fios perigo
+OUTROS;A rua do bairro alaga toda vez que chove.
+PODA;poda de árvoe
+OUTROS;o banco da praçada minha rua está quebrado.
+ENTULHO;gente largara um sofa na viela
+ENTULHO;Alguém descartou lixo acumulado na esquina durante a noite.
+BURACO;Um ciclista se machucou por causa de o asfalto todo esburacado na esquina com a Rua das Flores.
+ILUMINACAO;A lâmpada do poste está muito fraca.
+ILUMINACAO;Poste pisca a noite inteira e incomoda os moradores
+PODA;Depois da chuva uma árvore seca caiu sobre a calçada.
+PODA;pessoal a arvore aqui ta nos fios perigo
+ILUMINACAO;Solicito manutenção da iluminação pública. O poste em frente ao número 85 vive queimado.
+OUTROS;Um vazamento de água está desperdiçando água limpa.
+BURACO;gente o buraco na saída do viaduto ta cada vez maior há meses ninguem faz nada
+OUTROS;Solicito vistoria. A tampa do poço de visita está solta.
+ENTULHO;Abandonaram sacos de lixo no terreno baldio e toda semana jogam mais.
+ILUMINACAO;A iluminação da quadra fica piscando a noite toda e está perigoso voltar a pé à noite. Precisa de reparo no poste.
+PODA;depois da chuva umgalho eonrme caiu no meio da rua.
+PODA;Ninguém consegue passar pela calçada: o eucalipto está encostando nos fios.
+ENTULHO;Sofá abandonado na rua
+BURACO;Pista cheia de buracos
+ILUMINACAO;oi a lampada aqui ta apagado desde a chuva perigoso a noite
+BURACO;buaco rande na via
+ENTULHO;Lixo e entulho acumulados no terreno, mato alto também
+ENTULHO;Alguém despejou pneus velhos na beira da estrada durante a noite.
+ILUMINACAO;Solicito a troca da lâmpada. A lâmpada da esquina está sem funcionar.
+ILUMINACAO;A escuridão facilita roubo porque o poste da esquina está muito fraco.
+ENTULHO;gente jogaram restos de obra na viela de novo
+PODA;Depois da chuva a figueira quebrou sobre um carro.
+OUTROS;Calçada quebrada
+OUTROS;Pedimos manutenção. A lixeira pública está quebrada.
+OUTROS;Vazamento de água limpa saindo do asfalto
+ILUMINACAO;Metade dos postes da avenida está apagada
+ENTULHO;Está atraindo escorpião por causa de telhas quebradas na beira da estrada.
+ILUMINACAO;a ilumianção da viela está apagada e é desperdício de energia de dia.
+OUTROS;Favor verificar. A faixa de pedestre está apagada.
+ILUMINACAO;O poste em frente ao número 85 acende e apaga desde sábado. Pedimos manutenção na iluminação.
+OUTROS;gente o semáforoo está com defeito
+OUTROS;Peço que a equipe responsável resolva. O ponto de ônibus está com o abrigo quebrado.
+OUTROS;Tampa do bueiro fazendo barulho quando o carro passa
+PODA;A copa da árvore está com cupim e oca por dentro e é um risco para quem passa. Pedimos a remoção dos galhos.
+BURACO;A roda do meu carro entortou por causa de uma rachadura grande no asfalto na frente do mercado.
+ILUMINACAO;É desperdício de energia de dia porque a iluminação da viela está apagada.
+PODA;Pode cair em cima dos carros estacionados: a árvore precisa de poda.
+ILUMINACAO;Não dá pra ver quem está na rua à noite porque o refletor da praça está quebrado.
+BURACO;O asfalto está esfarelando em frente à escola e um ciclista se machucou.
+ENTULHO;Restos de reforma jogados na beira do córrego
+ILUMINACAO;oi o poste aqui fica piscando de novo
+PODA;Pedimos avaliação e poda da árvore. A mangueira está encostando nos fios.
+PODA;Um galho enorme está com o tronco rachado e pode cair em cima dos carros estacionados. Precisa de poda de limpeza.
+PODA;Galho enorme pendurado nos fios do poste, pode cair a qualquer momento
+PODA;Um galho enorme está com cupim e oco por dentro e já derrubou o fio da internet. Pedimos a remoção dos galhos.
+ENTULHO;Caçamba de obra largada na rua há um mês, cheia de lixo
+ILUMINACAO;Está tudo escuro na quadra: a iluminação da viela está quebrada.
+OUTROS;O semáforo perto da escola ficou travado no vermelho.
+BURACO;Alguém precisa consertar isso. Uma rachadura grande no asfalto na frente do mercado há duas semanas.
+BURACO;Tem uma rachadura grande no asfalto em frente à escola. Precisa refazer o pavimento.
+BURACO;O asfalto  afundou na saída do viaduto e esttá danificando a suspensão dos carros.
+ILUMINACAO;A luz da rua está sem funcionar e já teve assalto por causa do escuro. Pedimos a religação da iluminação.
+BURACO;Precisa refazer o pavimento. Uma cratera na subida da ladeira.
+ILUMINACAO;O post eem frente ao número 85 está sem funcionar e as crianças voltam da escola no escuro.
+ILUMINACAO;Peço a troca do reator. A luminária vive queimada.
+ENTULHO;Lixo acumulado na esquina
+ILUMINACAO;Poste apagado
+OUTROS;Solicito vistoria. O mato do terreno baldio está com cobras.
+BURACO;O asfalto afundou no meio da pista e o risco de acidente é grande.
+BURACO;gente esse buraco na pista sentido centro ta cada vez maior faz uns dez dias
+BURACO;gente esse buraco na pista sentido centro ta cada vez maior ninguem faz nada
+PODA;A raiz da árvore está levantando a calçada e o tronco está inclinado
+PODA;A mangueira está  invadindo o quintal e já derrubou o fio da internet. Precisa de poda de limpeza.
+PODA;Depois da chuva a mangueira quebrou no meio da rua.
+BURACO;Alguém precisa consertar isso. O asfalto todo esburacado na frente do mercado.
+BURACO;Já estourou o pneu de dois carros por causa de um buraco enorme no cruzamento.
+ILUMINACAO;Não dá pra ver quem está na rua à noite porque a luz do poste queimou.
+ILUMINACAO;oi a lampada aqui nao acendde faz tempo ta muito escuro
+PODA;Com o vento pode cair em cima de alguém: a sibipiruna está inclinada e pode cair.
+BURACO;Tem um desnível perigoso no pavimento no meio da pista.
+ILUMINACAO;Poste sem luz h dias
+ILUMINACAO;Refletor da quadra de esportes queimado
+BURACO;O asfalto rachou todo na subida da ladeira desde as últimas chuvas e motoqueiro já caiu aí.
+PODA;Depois da chuva a árvore da calçada quebrou sobre a calçada.
+OUTROS;Precisa de reparo. O ponto de ônibus está sem cobertura.
+ILUMINACAO;A escuridão facilita roubo porque o poste acende e apaga.
+ENTULHO;Tem telhas quebradas do lado do córrego desde o mês passado.
+BURACO;O asfalto abriu na entrada da garagem e a roda do meu carro entortou.
+OUTROS;A rua da minha rua fica com enxurrada forte.
+OUTROS;Bueiro entupido
+BURACO;Uma valeta funda na pista na pista sentido centro, motoqueiro já caiu aí.
+ENTULHO;alugém abandonou um monte de  entulho na calçada durante a noite.
+OUTROS;O muro da escola perto da escola foi pichado de novo.
+BURACO;gente esse buraco na curva ta cada vez maior desde o recapeamento mal feito ninguem faz nada
+BURACO;Um rombo no asfalto na curva, os carros desviam pela contramão. Pedimos recapeamento da via.
+ENTULHO;Alguém abandonou restosde construção na calçada durante a noite.
+BURACO;gente o buraco na esquina com a Rua Sete ta cada vez maior
+ENTULHO;Pedimos a retirada. Reestos de obra no terreno baldio.
+OUTROS;gente o parquinho da praça está com brinquedos quebrados alguem ve isso
+ILUMINACAO;Está tudo escuro na praça: a iluminação pública está quebrada.
+PODA;A árvore em frente de casa está inclinada e pode cair. Solicito poda.
+ENTULHO;Está atraindo escorpião por causa de uma caçamba lotada do lado do córrego.
+OUTROS;A calçada da minha rua está com o piso solto faz tempo.
+BURACO;Tem um desnível perigoso no pavimento na rua. Peço a operação tapa-buraco.
+BURACO;O asfalto cedeu no cruzamento desde o recapeamento mal feito e já estourou o pneu de dois carros.
+OUTROS;A tampa do poço de visita perto da escola está solta desde a chuva.
+ENTULHO;oi jogaram entulho do lado do córrego outra vez
+ENTULHO;gente lragaram entulho em frente ao número 230 outra vez
+BURACO;gente esse buraco na saída do viaduto ta cada vez maior alguem resolve pfv
+PODA;Poda dde árrvore
+ILUMINACAO;Está tudo escur ona praça: a luminária está muito fraca.
+ENTULHO;Precisa do cata-bagulho. Um monte de entulho na beira da estrada.
+BURACO;Buraco grande na via
+PODA;Depois da chuva a árvore ficou pendurado sobre um carro.
+ILUMINACAO;oi o poste aqui nao acende de novo
+ILUMINACAO;Praça às escuras
+ILUMINACAO;A luminária parou de funcionar há mais de um mês.
+OUTROS;gente a calçada está toda quebrada ninguem resolve
+OUTROS;Um animal morto está apodrecendo na calçada. Pedimos manutenção.
+OUTROS;oi um animal morto está na via t perigoso
+BURACO;Buraco naar ua
+BURACO;Pavimento ondulado e cheio de buracos na avenida
+OUTROS;Água de esgoto correndo na sarjeta
+OUTROS;Boca de lobo entupida
+ILUMINACAO;Está tudo escuro na iela: a luz da rua está quebrada.
+ENTULHO;Tem sacos de lixo do lado do córrego. Pedimos a retirada.
+ILUMINACAO;Rua inteira no escuro desde ontem à noite
+BURACO;gente o buraco na entrada da garagem ta cada vez maior desde o recapeamento mal feito vai acontecer acidente
+ENTULHO;Entulho na calçada
+BURACO;gente a cratera na entrada da garagem ta cada vez maior alguem resolve pfv
+PODA;Quando venta os galhos batem na janela: o pinheiro está bloqueando a placa de trânsito.
+BURACO;uma cratera na subida da ladeira, o risco de acidente é grande. solicito reparo no asfalo.
+ILUMINACAO;A iluminação pública fica acesa durante o dia e a rua fica um breu à noite.
+OUTROS;A rua fica com enxurrada forte. Precisa de reparo.
+BURACO;Tem um buraco perto do ponto de ônibus há meses. Precisa de tapa-buraco urgente.
+OUTROS;Barulho de obra durante a madrugada
+BURACO;gente esse buraco na faixa da direita ta cada vez maior alguem resolve pfv
+ILUMINACAO;Está tudo escuro na viela: a lâmpaada d aesquina está apagada.
+ENTULHO;Despejaram móveis velhos no terreno baldio e toda semana jogam mais. Pedimos a retirada.
+PODA;pessoal o galhao ta nos fios perigo
+BURACO;O asfalto soltou em placas na subida da ladeira e motoqueiro já caiu aí.
+PODA;A sibipiruna está seca e oferece risco. Pedimos a remoção dos galhos.
+OUTROS;Cachorro abandonado e machucado na praça
+OUTROS;Um animal morto está apdorecendo na calçada. Pedimos mauntenção.
+ENTULHO;Alguém abandonou uma geladeiira velha do lado do córrego durante a noite.
+ILUMINACAO;está tudo escuro na rua: a luminária apagouu depois da chuva.
+ILUMINACAO;Solicito manutenção da iluminação pública. A lâmpada da esquina está apagada.
+PODA;A sibipiruna está com cupim e oca por dentro e com o vento pode cair em cima de alguém. Solicito poda.
+ILUMINACAO;as crianças voltam da escola no escuro porqu a luminária fica piscando a nooite toda.
+ENTULHO;Colchão jogado na rua
+ENTULHO;oi jogaram entulho na calçada ta fedendo
+BURACO;gente o buraco na entrada da garagem ta cada vez maior faz mais de um mês
+ILUMINACAO;Ninguém enxerga a calçada à noite porque a iluminação da quadra está quebrada.
+PODA;Árvore com cupim
+PODA;árvore com rico de queda
+ILUMINACAO;Favor trocar a lâmpada. A iluminação pública queimou.
+ILUMINACAO;A luz da rua vive queimada e as crianças voltam da escola no escuro.
+ENTULHO;Alguém despejou restos de obra embaixo do viaduto durante a noite.
+OUTROS;O bueiro do bairro transborda quando chove.
+BURACO;Cratera aberta pela enxurrada na pista
+OUTROS;Faixa de pedestre apagada
+BURACO;Solicitto recuperação do asfalto. Um buraco enore na subida da ladeira desde as últimas chuvas.
+ENTULHO;Alguém deixou sacos de lixo na viela durante a noite.
+PODA;A sibipiruna está com o tronco rachado e já derrubou o fio da internet.
+PODA;Favor remover a árvore seca. O eucalipto está inclinado e pode cair.
+ENTULHO;Favor recolher. Sacos de lixo na beira da estrada.
+OUTROS;Favor verificar. O ponto de ônibus está com o abrigo quebrado.
+OUTROS;Precisa de reparo. A tampa do poço de visita está quebrada e faz barulho.
+PODA;Depois da chuva a árvore da calçada caiu sobre um carro.
+BURACO;gente esse buraco perto do ponto de ônibus ta cada vez maior faz uns dez dias vai acontecer acidente
+BURACO;O risco de acidente é grande por causa de um buracão logo depois da lombada.
+ENTULHO;Está fedendo muito por causa de pneus velhos na viela.
+PODA;Precisa de poda de limpeza. O eucalipto está com o tronco rachado.
+OUTROS;Pichação no poste e no muro da praça
+ENTULHO;Galhada e entulho largados no terreno baldio
+OUTROS;oi o semáforo ficou travado no vermelho
+ILUMINACAO;Pedimos a religação da iluminação. O poste da esquina fica piscando a noite toda.
+OUTROS;Um vazamento de água do bairro está alagando a rua desde a chuva.
+OUTROS;Solicito vistoria. A placa de pare está entortada.
+BURACO;Buraco perigoso no cruzamento
+PODA;Favor remover a árvore seca. O eucalipto está seco e oferece risco.
+BURACO;Asfalto cedendo na rua, quando chove enche de água e ninguém vê o buraco. Pedimos recapeamento da via.
+PODA;Um galho enorme está com cupim e oco por dentro.
+BURACO;O asfalto rachou todo na curva e à noite não dá pra ver e o carro cai direto.
+ENTULHO;Pedimos fiscalização e limpeza do local. Pneus velhos na esquina.
+ENTULHO;Tem um monte de entulho embaixo do viaduto há semanas. Solicito a remoção do entulho.
+BURACO;Tem asfalto cedendo na curva desde as últimas chuvas. Precisa refazer o pavimento.
+PODA;Solicito poda. Um galho enorme está invadindo o quintal.
+PODA;gente essa arvore ta seca alguem vem podar
+PODA;Peço a supressão da árvore condenada. O pinheiro está inclinado e pode cair.
+OUTROS;lixeia quebrada
+BURACO;Uma panela no asfalto na esquina com a Rua Sete, uma moto quase caiu ontem. Precisa de tapa-buraco urgente.
+OUTROS;O semáforo do bairro está com defeito.
+BURACO;Uma rachadura grande no asfalto na esquina com a Rua das Flores, os ônibus passam raspando.
+BURACO;gente esse buraco na esquina com a Rua Bahia ta cada vez maior
+OUTROS;A placa de pare em frente ao mercado caiu há semanas.
+OUTROS;A lixeira pública foi arrancada. Pedimos manutenção.
+PODA;pessoal o galhao ta nos fios
+PODA;A árvore da calçada está tampando a luz do poste e na última tempestade quase caiu. Peço a supressão da árvore condenada.
+BURACO;Cratera no asfalto
+BURACO;gente esse buraco na frente do mercado ta cada vez maior
+OUTROS;Semáforo com defeito
+ILUMINACAO;A iluminação pública fica acesa durante o dia e as crianças voltam da escola no escuro.
