@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { PERFIL } from '../../router/roles'
 import { getInitials } from '../../lib/format'
 import {
-  Home, Plus, FileText, ClipboardList, BarChart3, MapPin, LogOut, Settings2
+  Home, Plus, FileText, ClipboardList, BarChart3, MapPin, LogOut, Settings2, Brain
 } from 'lucide-react'
 import { cn } from '../../lib/cn'
 
@@ -16,12 +16,14 @@ const NAV = {
     { to: '/mapa-publico',        icon: MapPin,       label: 'Mapa público' },
   ],
   [PERFIL.SERVIDOR]: [
-    { to: '/painel',    icon: ClipboardList, label: 'Painel de triagem' },
-    { to: '/dashboard', icon: BarChart3,     label: 'Dashboard' },
+    { to: '/painel',       icon: ClipboardList, label: 'Painel de triagem' },
+    { to: '/dashboard',    icon: BarChart3,     label: 'Dashboard' },
+    { to: '/inteligencia', icon: Brain,         label: 'Inteligência' },
   ],
   [PERFIL.GESTOR]: [
     { to: '/painel',         icon: ClipboardList, label: 'Painel de triagem' },
     { to: '/dashboard',      icon: BarChart3,     label: 'Dashboard' },
+    { to: '/inteligencia',   icon: Brain,         label: 'Inteligência' },
     { to: '/tipos-servico',  icon: Settings2,     label: 'Tipos de serviço' },
   ],
 }

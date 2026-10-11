@@ -65,6 +65,8 @@ export const solicitacaoApi = {
   historicoAuditoria: (id)       => api.get(`/solicitacoes/${id}/historico/auditoria`),
   avaliar:            (id, data) => api.post(`/solicitacoes/${id}/avaliar`, data),
   exportarCsv:        ()         => api.get('/solicitacoes/exportar', { responseType: 'blob' }),
+  // Fase 6: chamados abertos do mesmo tipo perto do ponto (aviso de duplicidade)
+  proximas:           (params)   => api.get('/solicitacoes/proximas', { params }),
 }
 
 export const tipoServicoApi = {
@@ -78,6 +80,33 @@ export const tipoServicoApi = {
 
 export const dashboardApi = {
   obter: () => api.get('/dashboard'),
+}
+
+// ── Fase 6 ──────────────────────────────────────────────────
+// IA de triagem (Naive Bayes no próprio backend — o texto não sai do servidor)
+export const iaApi = {
+  classificar: (descricao) => api.post('/ia/classificar', { descricao }),
+  modelo:      ()          => api.get('/ia/modelo'),
+}
+
+// Análise espacial: KD-Tree + Union-Find no backend
+export const analiseApi = {
+  agrupamentos: (params) => api.get('/analise/agrupamentos', { params }),
+}
+
+export const bairroApi = {
+  listar: () => api.get('/bairros'),
+}
+
+// Upload real de fotos (antes a imagem ia como base64 num campo de 300 caracteres)
+export const arquivoApi = {
+  enviarImagem: (file) => {
+    const form = new FormData()
+    form.append('arquivo', file)
+    // Content-Type explícito: sem ele o axios converteria o FormData em JSON
+    // (a instância tem application/json como padrão); o navegador completa o boundary.
+    return api.post('/arquivos', form, { headers: { 'Content-Type': 'multipart/form-data' }, timeout: 60000 })
+  },
 }
 
 // ── ViaCEP (externo, não passa pelo interceptor) ────────────

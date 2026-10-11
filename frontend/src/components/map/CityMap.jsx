@@ -7,9 +7,9 @@ const DEFAULT_ZOOM = 13
 
 /**
  * Mapa somente-leitura com pins de solicitações.
- * @param {{ items: Array, onSelect?: Function, selectedId?: number, height?: string }} props
+ * @param {{ items: Array, onSelect?: Function, selectedId?: number, height?: string, zoom?: number }} props
  */
-export default function CityMap({ items = [], onSelect, selectedId, height = '100%' }) {
+export default function CityMap({ items = [], onSelect, selectedId, height = '100%', zoom = DEFAULT_ZOOM }) {
   // Centro: média das coordenadas válidas, senão São Paulo
   const validos = items.filter(i => i.latitude != null && i.longitude != null)
   const center = validos.length > 0
@@ -23,7 +23,7 @@ export default function CityMap({ items = [], onSelect, selectedId, height = '10
     <div style={{ height, width: '100%' }} className="relative rounded-2xl overflow-hidden border border-slate-200">
       <MapContainer
         center={center}
-        zoom={DEFAULT_ZOOM}
+        zoom={zoom}
         scrollWheelZoom
         style={{ height: '100%', width: '100%', background: '#f1f5f9' }}>
         <TileLayer
