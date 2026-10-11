@@ -8,7 +8,11 @@ services:
       - "1521:1521"
     environment:
       ORACLE_PASSWORD: hackgov123
+      # cria o usuário da aplicação no XEPDB1 quando o volume é novo (ignorado se o banco já existe)
+      APP_USER: hackgov
+      APP_USER_PASSWORD: hackgov123
     volumes:
+      # volume externo: na primeira vez, rode "docker volume create oracle-data"
       - oracle-data:/opt/oracle/oradata
     restart: unless-stopped
     healthcheck:
@@ -32,7 +36,7 @@ services:
       ORACLE_USER: hackgov
       ORACLE_PASS: hackgov123
       # dev  = tipos de serviço, bairro e usuários de teste
-      # demo = massa de demonstração da Fase 6 (~1.850 solicitações abr–set/2026)
+      # demo = massa de demonstração da Fase 6 (1.869 solicitações abr–set/2026)
       SPRING_PROFILES_ACTIVE: dev,demo
       UPLOADS_DIR: /app/uploads
     volumes:

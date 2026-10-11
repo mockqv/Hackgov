@@ -11,6 +11,10 @@
 --  Pré-requisito: o backend já ter subido ao menos uma vez (o Hibernate cria
 --  as tabelas e as colunas novas ID_TIPO_SUGERIDO_IA e CONFIANCA_IA). Para ter
 --  dados, suba com SPRING_PROFILES_ACTIVE=dev,demo.
+--
+--  Privilégio: criar a view exige CREATE VIEW, que os papéis CONNECT/RESOURCE
+--  não incluem. Se aparecer ORA-01031, rode como SYSTEM no XEPDB1:
+--      GRANT CREATE VIEW TO hackgov;
 -- ════════════════════════════════════════════════════════════════════════════
 
 -- ── 1. Índices ───────────────────────────────────────────────────────────────

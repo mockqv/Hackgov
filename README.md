@@ -15,33 +15,34 @@ hackgov-monorepo/
 ## Subir tudo com um comando
 
 ```bash
-# Configure o Oracle antes (ver abaixo), depois:
+docker volume create oracle-data   # só na primeira vez: o compose usa um volume externo para o banco
 docker-compose up --build
 ```
 
 - Frontend: http://localhost:5173
-- Backend API: http://localhost:8080
-- Swagger UI: http://localhost:8080/swagger-ui.html
+- Backend API: http://localhost:8081 (porta 8080 dentro do container)
+- Swagger UI: http://localhost:8081/swagger-ui.html
 
-## Oracle local (pré-requisito)
+## Banco Oracle
 
-O Oracle roda **fora** do Docker (instalado localmente).
+O Oracle 21c XE sobe no próprio `docker-compose` (serviço `oracle-hackgov`, imagem `gvenzl/oracle-xe:21-slim`)
+e o backend só inicia depois que o healthcheck do banco passa. Num volume novo, a imagem cria o usuário
+`hackgov` no PDB `XEPDB1` (variáveis `APP_USER`/`APP_USER_PASSWORD`) e o Hibernate cria as tabelas na
+primeira subida (`ddl-auto=update`).
+
+Os scripts da Fase 6 criam uma view. Se o usuário `hackgov` foi criado à mão só com `CONNECT, RESOURCE`
+(esses papéis não incluem criar views) e aparecer `ORA-01031`, conceda como SYSTEM, no `XEPDB1`:
 
 ```sql
--- Execute como SYSDBA:
-CREATE USER hackgov IDENTIFIED BY hackgov123;
-GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO hackgov;
--- Depois execute o script DDL da Fase 3
+GRANT CREATE VIEW TO hackgov;
 ```
-
-Ajuste `ORACLE_URL` no `docker-compose.yml` se necessário.
 
 ## Fase 6 — IA, análise de dados e estruturas de dados
 
 ### Massa de demonstração
 O `docker-compose` sobe o backend com `SPRING_PROFILES_ACTIVE=dev,demo`:
 - `dev` cria tipos de serviço, o bairro Centro e os usuários de teste;
-- `demo` carrega ~1.850 solicitações sintéticas (abril–setembro/2026) com histórico de status,
+- `demo` carrega 1.869 solicitações sintéticas (abril–setembro/2026) com histórico de status,
   avaliações e a sugestão da IA. Geração determinística (semente fixa): um banco limpo recebe
   sempre as mesmas linhas, então as consultas reproduzem os números da documentação.
   Leva alguns segundos na primeira subida e não roda de novo depois.
@@ -70,6 +71,6 @@ Depois de subir o backend uma vez (o Hibernate cria as colunas novas), rode no S
 ### Testes e benchmark
 ```bash
 cd backend
-mvn test                      # 30 testes: IA, KD-Tree, Union-Find, agrupamento, gerador da massa demo
+mvn test                      # 31 testes: IA, KD-Tree, Union-Find, agrupamento, gerador da massa demo
 mvn test-compile && java -cp target/classes:target/test-classes br.com.hackgov.algoritmos.BenchmarkAgrupamento
 ```
