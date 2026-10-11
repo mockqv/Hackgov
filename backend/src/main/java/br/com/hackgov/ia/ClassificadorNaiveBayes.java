@@ -122,7 +122,8 @@ public final class ClassificadorNaiveBayes {
         ranking.sort(Comparator.comparingDouble(ProbabilidadeClasse::probabilidade).reversed());
 
         ProbabilidadeClasse vencedora = ranking.get(0);
-        List<String> termos = termosRelevantes(conhecidas, vencedora.classe(), classes);
+        List<String> termos = termosRelevantes(conhecidas, vencedora.classe(), classes,
+                NormalizadorTexto.formasOriginais(texto));
         return new ResultadoClassificacao(vencedora.classe(), vencedora.probabilidade(),
                 Collections.unmodifiableList(ranking), termos, conhecidas.size());
     }
@@ -134,7 +135,8 @@ public final class ClassificadorNaiveBayes {
         return Math.log((contagem + alfa) / (total + alfa * vocabulario.size()));
     }
 
-    private List<String> termosRelevantes(List<String> conhecidas, String vencedora, List<String> classes) {
+    private List<String> termosRelevantes(List<String> conhecidas, String vencedora, List<String> classes,
+                                          Map<String, String> formasOriginais) {
         Map<String, Double> contraste = new LinkedHashMap<>();
         for (String caracteristica : new LinkedHashSet<>(conhecidas)) {
             double naVencedora = logVerossimilhanca(caracteristica, vencedora);
@@ -151,7 +153,7 @@ public final class ClassificadorNaiveBayes {
         return contraste.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .limit(LIMITE_TERMOS_RELEVANTES)
-                .map(e -> NormalizadorTexto.legivel(e.getKey()))
+                .map(e -> NormalizadorTexto.legivel(e.getKey(), formasOriginais))
                 .toList();
     }
 

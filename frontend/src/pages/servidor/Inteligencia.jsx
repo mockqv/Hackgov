@@ -4,7 +4,7 @@ import { Brain, Gauge, Layers, MapPinned, Network, RefreshCw, Sparkles, Target, 
 
 import useApi from '../../hooks/useApi'
 import { analiseApi, iaApi } from '../../lib/api'
-import { formatDate } from '../../lib/format'
+import { formatDate, formatProbabilidade } from '../../lib/format'
 
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
@@ -159,7 +159,7 @@ export default function Inteligencia() {
 
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
                 <div className="lg:col-span-3 h-[360px]">
-                  <CityMap items={pinos} zoom={11} selectedId={selecionado}
+                  <CityMap items={pinos} zoom={11} ajustarAosPontos selectedId={selecionado}
                     onSelect={(p) => setSelecionado(p.id)} height="360px"/>
                 </div>
                 <div className="lg:col-span-2 max-h-[360px] overflow-y-auto pr-1">
@@ -238,7 +238,7 @@ function TestarClassificador() {
           <div className="space-y-2 pt-1">
             <div className="text-sm text-slate-700">
               <span className="font-bold text-slate-900">{resultado.tipoDescricao}</span>
-              {' '}— confiança {pct(resultado.confianca)}
+              {' '}— confiança {formatProbabilidade(resultado.confianca, 1)}
               {!resultado.confiavel && <span className="ml-1 text-amber-600 text-xs font-semibold">(abaixo do limiar: não seria sugerido)</span>}
             </div>
             {resultado.alternativas.map(a => (
@@ -247,7 +247,7 @@ function TestarClassificador() {
                 <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                   <div className="h-full rounded-full bg-blue-600" style={{ width: `${Math.max(1, a.probabilidade * 100)}%` }}/>
                 </div>
-                <span className="text-[11px] text-slate-500 w-12 text-right font-mono">{pct(a.probabilidade)}</span>
+                <span className="text-[11px] text-slate-500 w-14 text-right font-mono">{formatProbabilidade(a.probabilidade, 1)}</span>
               </div>
             ))}
             {resultado.termosRelevantes?.length > 0 && (
@@ -328,8 +328,8 @@ function CurvaLimiar({ curva, limiar }) {
           const atual = Math.abs(p.limiar - limiar) < 1e-9
           return (
             <div key={p.limiar} className={`rounded-xl border px-3 py-2 ${atual ? 'border-blue-300 bg-blue-50' : 'border-slate-200 bg-white'}`}>
-              <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
-                τ = {String(p.limiar.toFixed(1)).replace('.', ',')}{atual && ' · atual'}
+              <div className="text-[10px] tracking-wide text-slate-500 font-semibold">
+                LIMIAR {String(p.limiar.toFixed(1)).replace('.', ',')}{atual && ' · ATUAL'}
               </div>
               <div className="text-[11px] text-slate-600 mt-1">cobertura <b className="text-slate-900">{pct(p.cobertura)}</b></div>
               <div className="text-[11px] text-slate-600">acurácia <b className="text-slate-900">{pct(p.acuracia)}</b></div>

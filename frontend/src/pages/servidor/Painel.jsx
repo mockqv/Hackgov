@@ -7,7 +7,7 @@ import { AlertTriangle, CopyCheck, History, RefreshCw, Search, Sparkles } from '
 import useApi from '../../hooks/useApi'
 import { analiseApi, solicitacaoApi } from '../../lib/api'
 import { AtualizarStatusSchema } from '../../lib/validation'
-import { formatDate, formatDateTime } from '../../lib/format'
+import { formatDate, formatDateTime, formatProbabilidade } from '../../lib/format'
 
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
@@ -183,7 +183,7 @@ export default function Painel() {
                         <div className="flex flex-wrap gap-1.5 mt-2">
                           {iaDiverge && (
                             <Badge variant="blue" className="normal-case tracking-normal">
-                              <Sparkles size={10}/> IA sugere: {item.tipoSugeridoIa} ({Math.round(item.confiancaIa * 100)}%)
+                              <Sparkles size={10}/> IA sugere: {item.tipoSugeridoIa} ({formatProbabilidade(item.confiancaIa)})
                             </Badge>
                           )}
                           {grupo && (

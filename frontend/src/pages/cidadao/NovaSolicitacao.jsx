@@ -9,6 +9,7 @@ import {
   solicitacaoApi, tipoServicoApi, bairroApi, iaApi, nominatimReverse, nominatimForward,
 } from '../../lib/api'
 import { SolicitacaoSchema } from '../../lib/validation'
+import { formatProbabilidade } from '../../lib/format'
 
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
@@ -344,14 +345,14 @@ function SugestaoIa({ sugestao, analisando, tipoSelecionado, onUsar }) {
   }
   if (!sugestao.disponivel) return null
 
-  const pct = Math.round((sugestao.confianca || 0) * 100)
+  const pct = formatProbabilidade(sugestao.confianca)
   if (!sugestao.confiavel) {
     return (
       <div className="flex items-start gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-[11px] text-slate-500">
         <Sparkles size={13} className="mt-0.5 shrink-0"/>
         <span>
           A IA não tem confiança suficiente para sugerir um tipo
-          {sugestao.codigo ? ` (melhor palpite: ${sugestao.tipoDescricao}, ${pct}%)` : ''}. Escolha o tipo manualmente.
+          {sugestao.codigo ? ` (melhor palpite: ${sugestao.tipoDescricao}, ${pct})` : ''}. Escolha o tipo manualmente.
         </span>
       </div>
     )
@@ -369,7 +370,7 @@ function SugestaoIa({ sugestao, analisando, tipoSelecionado, onUsar }) {
             <div className="text-[10px] font-semibold uppercase tracking-wider text-blue-700">Sugestão da IA de triagem</div>
             <div className="text-sm font-bold text-slate-900 truncate">
               {sugestao.tipoDescricao}
-              <span className="ml-1.5 text-xs font-semibold text-blue-700">{pct}% de confiança</span>
+              <span className="ml-1.5 text-xs font-semibold text-blue-700">{pct} de confiança</span>
             </div>
           </div>
         </div>

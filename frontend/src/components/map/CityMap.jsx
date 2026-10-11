@@ -1,5 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { statusIcon } from './leafletSetup'
+import { useEffect } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import L, { statusIcon } from './leafletSetup'
 import { STATUS_DOT } from '../ui/StatusBadge'
 
 const DEFAULT_CENTER = [-23.55052, -46.633308] // São Paulo
@@ -7,9 +8,10 @@ const DEFAULT_ZOOM = 13
 
 /**
  * Mapa somente-leitura com pins de solicitações.
- * @param {{ items: Array, onSelect?: Function, selectedId?: number, height?: string, zoom?: number }} props
+ * @param {{ items: Array, onSelect?: Function, selectedId?: number, height?: string, zoom?: number,
+ *           ajustarAosPontos?: boolean }} props
  */
-export default function CityMap({ items = [], onSelect, selectedId, height = '100%', zoom = DEFAULT_ZOOM }) {
+export default function CityMap({ items = [], onSelect, selectedId, height = '100%', zoom = DEFAULT_ZOOM, ajustarAosPontos = false }) {
   // Centro: média das coordenadas válidas, senão São Paulo
   const validos = items.filter(i => i.latitude != null && i.longitude != null)
   const center = validos.length > 0
@@ -30,6 +32,7 @@ export default function CityMap({ items = [], onSelect, selectedId, height = '10
           attribution='&copy; OpenStreetMap'
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
+        {ajustarAosPontos && <EnquadrarPontos pontos={validos}/>}
         {validos.map(item => (
           <Marker
             key={item.id}
@@ -48,4 +51,20 @@ export default function CityMap({ items = [], onSelect, selectedId, height = '10
       </MapContainer>
     </div>
   )
+}
+
+/** Ajusta o zoom/centro para que todos os pontos apareçam (ex.: pontos críticos espalhados pela cidade). */
+function EnquadrarPontos({ pontos }) {
+  const map = useMap()
+  const chave = pontos.map(p => `${p.latitude.toFixed(5)},${p.longitude.toFixed(5)}`).join('|')
+  useEffect(() => {
+    if (pontos.length === 0) return
+    if (pontos.length === 1) {
+      map.setView([pontos[0].latitude, pontos[0].longitude], 15)
+      return
+    }
+    map.fitBounds(L.latLngBounds(pontos.map(p => [p.latitude, p.longitude])), { padding: [28, 28], maxZoom: 15 })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map, chave])
+  return null
 }

@@ -2,8 +2,10 @@ package br.com.hackgov.ia;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -37,7 +39,7 @@ public final class NormalizadorTexto {
             "todas", "nada", "coisa", "faz", "fazer", "estava", "ficou", "fica", "vez",
             "vezes", "solicito", "solicitacao", "peco", "pedimos", "gostaria", "prefeitura",
             "providencias", "urgente", "obrigado", "obrigada", "ola", "oi", "quanto", "antes",
-            "cima", "ta", "tava", "to", "vc", "pq", "pfv", "ai"
+            "cima", "ta", "tava", "to", "vc", "pq", "pfv", "ai", "tudo"
     );
 
     private NormalizadorTexto() {}
@@ -79,6 +81,32 @@ public final class NormalizadorTexto {
     /** Converte uma característica interna em texto legível para a tela ("poste_apagado" → "poste apagado"). */
     public static String legivel(String caracteristica) {
         return caracteristica.replace('_', ' ');
+    }
+
+    /**
+     * Como {@link #legivel(String)}, mas devolvendo cada radical na grafia em que o
+     * usuário escreveu (com acento): "arvore_caiu" → "árvore caiu".
+     */
+    public static String legivel(String caracteristica, Map<String, String> formasOriginais) {
+        String[] partes = caracteristica.split("_");
+        StringBuilder sb = new StringBuilder();
+        for (String parte : partes) {
+            if (sb.length() > 0) sb.append(' ');
+            sb.append(formasOriginais.getOrDefault(parte, parte));
+        }
+        return sb.toString();
+    }
+
+    /** Radical → palavra como aparece no texto original (minúscula, acentuada). */
+    public static Map<String, String> formasOriginais(String texto) {
+        Map<String, String> formas = new HashMap<>();
+        if (texto == null) return formas;
+        for (String palavra : texto.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{N}]+")) {
+            String normalizada = normalizar(palavra);
+            if (normalizada.isEmpty() || normalizada.contains(" ")) continue;
+            formas.putIfAbsent(radical(normalizada), palavra);
+        }
+        return formas;
     }
 
     /**

@@ -46,6 +46,15 @@ class NormalizadorTextoTest {
     }
 
     @Test
+    @DisplayName("termos exibidos ao usuário mantêm a grafia original (com acento)")
+    void legivelComGrafiaOriginal() {
+        var formas = NormalizadorTexto.formasOriginais("A árvore caiu sobre a lâmpada do poste");
+        assertEquals("árvore caiu", NormalizadorTexto.legivel("arvore_caiu", formas));
+        assertEquals("lâmpada", NormalizadorTexto.legivel("lampada", formas));
+        assertEquals("fiacao", NormalizadorTexto.legivel("fiacao", formas)); // sem forma original: usa o radical
+    }
+
+    @Test
     @DisplayName("texto só com stopwords não gera características")
     void textoSemConteudo() {
         assertTrue(NormalizadorTexto.caracteristicas("Por favor, olá, bom dia!").isEmpty());

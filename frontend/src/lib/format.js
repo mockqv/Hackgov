@@ -65,3 +65,20 @@ export const isValidCpf = (cpf) => {
 // ── Iniciais para Avatar ────────────────────────────────────
 export const getInitials = (nome = '') =>
   nome.trim().split(/\s+/).slice(0, 2).map(p => p[0]?.toUpperCase() || '').join('') || '?'
+
+// ── Probabilidades (IA de triagem) ──────────────────────────
+/**
+ * Probabilidade 0..1 em porcentagem pt-BR, sem prometer certeza absoluta:
+ * 0,9996 → ">99%" e 0,0002 → "<1%" (com casas = 0). O Naive Bayes costuma
+ * produzir valores muito próximos de 0 e 1; arredondar para "100%" passaria
+ * uma falsa ideia de certeza para quem lê a tela.
+ */
+export const formatProbabilidade = (v, casas = 0) => {
+  if (v == null || Number.isNaN(Number(v))) return '—'
+  const p = Number(v) * 100
+  const passo = Math.pow(10, -casas)
+  const fmt = (x) => x.toFixed(casas).replace('.', ',')
+  if (p >= 100 - passo / 2) return `>${fmt(100 - passo)}%`
+  if (p > 0 && p < passo / 2) return `<${fmt(passo)}%`
+  return `${fmt(p)}%`
+}

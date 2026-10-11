@@ -131,8 +131,8 @@ public final class GeradorDadosDemo {
         DadosDemo.Avaliacao avaliacao = null;
 
         if (cancelar) {
-            LocalDateTime analise = abertura.plusHours(2 + rnd.nextInt(20));
-            LocalDateTime cancelamento = analise.plusHours(4 + rnd.nextInt(72));
+            LocalDateTime analise = noExpediente(abertura.plusHours(2 + rnd.nextInt(20)));
+            LocalDateTime cancelamento = noExpediente(analise.plusHours(4 + rnd.nextInt(72)));
             if (!analise.isAfter(DATA_REFERENCIA)) {
                 historico.add(new DadosDemo.Transicao("RECEBIDO", "EM_ANALISE", analise, responsavel, null));
                 status = "EM_ANALISE";
@@ -151,7 +151,7 @@ public final class GeradorDadosDemo {
             for (int i = 0; i < etapas.length; i++) {
                 LocalDateTime quando = i == etapas.length - 1
                         ? fim
-                        : abertura.plus(Duration.ofMinutes((long) (duracaoDias * fracoes[i] * 24 * 60)));
+                        : noExpediente(abertura.plus(Duration.ofMinutes((long) (duracaoDias * fracoes[i] * 24 * 60))));
                 if (!quando.isAfter(ultimo)) quando = ultimo.plusMinutes(30);
                 if (quando.isAfter(DATA_REFERENCIA)) break;
                 historico.add(new DadosDemo.Transicao(anterior, etapas[i], quando, responsavel, null));
@@ -301,6 +301,13 @@ public final class GeradorDadosDemo {
         LocalDateTime data = conclusao.plusHours(2 + rnd.nextInt(70));
         if (data.isAfter(DATA_REFERENCIA)) data = DATA_REFERENCIA;
         return new DadosDemo.Avaliacao(nota, textos.comentarioAvaliacao(nota), data);
+    }
+
+    /** Equipes trabalham das 8h às 18h: ações fora desse horário passam para o próximo expediente. */
+    private LocalDateTime noExpediente(LocalDateTime momento) {
+        if (momento.getHour() < 8) return momento.toLocalDate().atTime(8, rnd.nextInt(60));
+        if (momento.getHour() >= 18) return momento.toLocalDate().plusDays(1).atTime(8, rnd.nextInt(60));
+        return momento;
     }
 
     /** Conclusão cai em horário de expediente (8h–17h) do dia previsto pela duração. */
