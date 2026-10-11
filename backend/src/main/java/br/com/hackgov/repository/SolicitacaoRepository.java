@@ -25,22 +25,24 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
     """)
     List<Solicitacao> findTodasAbertas();
 
+    // Busca por proximidade (Fase 6): caixa de coordenadas com BETWEEN — predicado
+    // "sargável", que aproveita o índice IX_LOC_LAT_LON. A distância exata (Haversine)
+    // é conferida depois, em Java (ver br.com.hackgov.algoritmos.Geo).
     @Query("""
         SELECT s FROM Solicitacao s
-        WHERE s.localizacao.id IN (
-            SELECT l.id FROM Localizacao l
-            WHERE ABS(l.latitude  - :lat) * 111000 <= 10
-              AND ABS(l.longitude - :lon) * 111000 <= 10
-        )
-        AND s.tipoServico.id = :tipoId
-        AND s.status NOT IN (
-            br.com.hackgov.model.StatusSolicitacao.CONCLUIDO,
-            br.com.hackgov.model.StatusSolicitacao.CANCELADO
-        )
+        WHERE s.tipoServico.id = :tipoId
+          AND s.status NOT IN (
+              br.com.hackgov.model.StatusSolicitacao.CONCLUIDO,
+              br.com.hackgov.model.StatusSolicitacao.CANCELADO
+          )
+          AND s.localizacao.latitude  BETWEEN :latMin AND :latMax
+          AND s.localizacao.longitude BETWEEN :lonMin AND :lonMax
     """)
-    List<Solicitacao> findDuplicatas(@Param("lat") double lat,
-                                     @Param("lon") double lon,
-                                     @Param("tipoId") Long tipoId);
+    List<Solicitacao> findAbertasNaCaixa(@Param("tipoId") Long tipoId,
+                                         @Param("latMin") double latMin,
+                                         @Param("latMax") double latMax,
+                                         @Param("lonMin") double lonMin,
+                                         @Param("lonMax") double lonMax);
 
     @Query("SELECT s FROM Solicitacao s ORDER BY s.dataAbertura DESC")
     List<Solicitacao> findAllParaMapa();
@@ -63,10 +65,14 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> 
     List<Object[]> avgTempoResolucaoByTipo();
 
     // Linha única: [quantidade concluída dentro do SLA, total concluído]. Base do
-    // KPI "% SLA cumprido" no dashboard (Parte 4 — estatística aplicada ao negócio).
+    // KPI "% SLA cumprido" no dashboard.
+    // Correção da Fase 6: no Oracle, CAST(TIMESTAMP AS DATE) mantém a hora e
+    // DATA_PREVISAO é uma DATE à meia-noite — um chamado concluído às 14h do
+    // próprio dia do prazo era contado como atrasado. "< previsão + 1" compara
+    // com o fim do dia do prazo (na massa demo o KPI subiu de 56,0% para 64,7%).
     @Query(value = """
         SELECT
-            SUM(CASE WHEN CAST(s.data_conclusao AS DATE) <= s.data_previsao THEN 1 ELSE 0 END),
+            SUM(CASE WHEN s.data_conclusao < s.data_previsao + 1 THEN 1 ELSE 0 END),
             COUNT(*)
         FROM solicitacao s
         WHERE s.status = 'CONCLUIDO'

@@ -57,6 +57,18 @@ public class Solicitacao {
     @Column(name = "DATA_CONCLUSAO")
     private LocalDateTime dataConclusao;
 
+    // ── IA de triagem (Fase 6) ──────────────────────────────
+    // Tipo sugerido pelo classificador no momento da abertura e a confiança da
+    // sugestão. É apoio à decisão: o tipo oficial continua sendo o escolhido
+    // pelo cidadão (ID_TIPO). Guardar a sugestão permite medir, com dados reais,
+    // quanto a IA concorda com o cidadão e com a triagem (Parte 4, consulta Q5).
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_TIPO_SUGERIDO_IA")
+    private TipoServico tipoSugeridoIa;
+
+    @Column(name = "CONFIANCA_IA")
+    private Double confiancaIa;
+
     @PrePersist
     protected void prePersist() {
         if (protocolo == null) {

@@ -55,6 +55,18 @@ public class SolicitacaoController {
         return ResponseEntity.ok(ApiResponse.ok(service.listarParaMapa()));
     }
 
+    @GetMapping("/proximas")
+    @PreAuthorize("isAuthenticated()")
+    @Operation(summary = "Chamados abertos do mesmo tipo perto de um ponto (aviso de possível duplicidade)")
+    public ResponseEntity<ApiResponse<List<SolicitacaoProximaResponse>>> proximas(
+            @RequestParam double latitude,
+            @RequestParam double longitude,
+            @RequestParam Long tipoServicoId,
+            @RequestParam(defaultValue = "80") double raioMetros) {
+        double raio = Math.max(10, Math.min(raioMetros, 500));
+        return ResponseEntity.ok(ApiResponse.ok(service.listarProximas(latitude, longitude, tipoServicoId, raio)));
+    }
+
     @GetMapping(value = "/exportar", produces = "text/csv")
     @PreAuthorize("hasRole('CIDADAO')")
     @Operation(summary = "Exportar as próprias solicitações em CSV (gera trilha de auditoria)")

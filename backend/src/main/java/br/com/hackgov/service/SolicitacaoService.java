@@ -1,5 +1,6 @@
 package br.com.hackgov.service;
 
+import br.com.hackgov.algoritmos.Geo;
 import br.com.hackgov.audit.AuditLog;
 import br.com.hackgov.dto.*;
 import br.com.hackgov.exception.BusinessException;
@@ -35,6 +36,10 @@ public class SolicitacaoService {
     private final ServidorRepository       servidorRepo;
     private final HistoricoStatusRepository historicoRepo;
     private final AvaliacaoRepository      avaliacaoRepo;
+    private final TriagemIaService         triagemIa;
+
+    /** Raio da regra de duplicidade na abertura (mesma regra das fases anteriores, agora em metros reais). */
+    private static final double RAIO_DUPLICIDADE_M = 10.0;
 
     // ── CRIAR SOLICITAÇÃO (usuário autenticado = CIDADAO) ────
     public SolicitacaoDetalheResponse criar(SolicitacaoRequest req) {
@@ -53,8 +58,11 @@ public class SolicitacaoService {
         Bairro bairro = bairroRepo.findById(req.getBairroId())
                 .orElseThrow(() -> new NotFoundException("Bairro não encontrado"));
 
-        List<Solicitacao> duplicatas = solicitacaoRepo
-                .findDuplicatas(req.getLatitude(), req.getLongitude(), tipo.getId());
+        // Regra de duplicidade: mesmo tipo, ainda aberta, a até 10 m. A busca usa uma
+        // caixa de coordenadas indexável e a distância exata é conferida com Haversine
+        // (antes: "graus × 111.000" também para longitude, ~9% de erro em São Paulo).
+        List<Solicitacao> duplicatas = abertasProximas(req.getLatitude(), req.getLongitude(),
+                tipo.getId(), RAIO_DUPLICIDADE_M);
 
         if (!duplicatas.isEmpty()) {
             Solicitacao dup = duplicatas.get(0);
@@ -86,10 +94,52 @@ public class SolicitacaoService {
                 .dataPrevisao(previsao)
                 .build();
 
+        // IA de triagem (Fase 6): grava a sugestão e a confiança junto com o chamado.
+        // Não altera o tipo escolhido pelo cidadão — serve de apoio à triagem e de
+        // base para medir a concordância IA × cidadão (consulta Q5 da Parte 4).
+        triagemIa.sugerir(req.getDescricao()).ifPresent(sugestao -> {
+            tipoServicoRepo.findByCodigoIgnoreCase(sugestao.classe()).ifPresent(solic::setTipoSugeridoIa);
+            solic.setConfiancaIa(Math.round(sugestao.confianca() * 10_000.0) / 10_000.0);
+        });
+
         Solicitacao salva = solicitacaoRepo.save(solic);
         log.info("Solicitação criada: {} por cidadão {}", salva.getProtocolo(), cidadao.getId());
 
         return SolicitacaoDetalheResponse.from(salva);
+    }
+
+    // ── CHAMADOS ABERTOS PRÓXIMOS (aviso de possível duplicidade) ──
+    // Mostrado no formulário antes de enviar: se já existe um chamado aberto do
+    // mesmo tipo a poucos metros, o cidadão pode só acompanhar o protocolo
+    // existente em vez de abrir outro. Usa um raio maior que o da regra de
+    // bloqueio (10 m) justamente para avisar, sem impedir.
+    @Transactional(readOnly = true)
+    public List<SolicitacaoProximaResponse> listarProximas(double latitude, double longitude,
+                                                           Long tipoServicoId, double raioMetros) {
+        return abertasProximas(latitude, longitude, tipoServicoId, raioMetros).stream()
+                .map(s -> new SolicitacaoProximaResponse(
+                        s.getProtocolo(),
+                        s.getTipoServico().getDescricao(),
+                        s.getStatus().name(),
+                        Math.round(distancia(s, latitude, longitude) * 10.0) / 10.0,
+                        s.getDataAbertura()))
+                .toList();
+    }
+
+    /** Abertas do tipo informado dentro do raio, da mais próxima para a mais distante. */
+    private List<Solicitacao> abertasProximas(double latitude, double longitude, Long tipoId, double raioMetros) {
+        double dLat = raioMetros / 111_195.0;
+        double dLon = raioMetros / (111_195.0 * Math.cos(Math.toRadians(latitude)));
+        return solicitacaoRepo.findAbertasNaCaixa(tipoId, latitude - dLat, latitude + dLat,
+                        longitude - dLon, longitude + dLon).stream()
+                .filter(s -> distancia(s, latitude, longitude) <= raioMetros)
+                .sorted(Comparator.comparingDouble(s -> distancia(s, latitude, longitude)))
+                .toList();
+    }
+
+    private static double distancia(Solicitacao s, double latitude, double longitude) {
+        return Geo.distanciaMetros(latitude, longitude,
+                s.getLocalizacao().getLatitude(), s.getLocalizacao().getLongitude());
     }
 
     // ── BUSCAR POR PROTOCOLO (público) ───────────────────────
