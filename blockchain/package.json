@@ -1,0 +1,17 @@
+{
+  "name": "hackgov-blockchain",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fase 7 — smart contract de registro e ancoragem da auditoria do HackGov",
+  "type": "commonjs",
+  "scripts": {
+    "compilar": "node scripts/compilar.js",
+    "test": "node scripts/compilar.js && node --test test/registro.test.js",
+    "demo": "node scripts/compilar.js && node scripts/demo.js"
+  },
+  "dependencies": {
+    "ethers": "6.13.4",
+    "ganache": "7.9.2",
+    "solc": "0.8.28"
+  }
+}
