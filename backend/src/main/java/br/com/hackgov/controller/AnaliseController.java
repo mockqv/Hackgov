@@ -2,7 +2,9 @@ package br.com.hackgov.controller;
 
 import br.com.hackgov.dto.AgrupamentosResponse;
 import br.com.hackgov.dto.ApiResponse;
+import br.com.hackgov.dto.EstatisticaResponse;
 import br.com.hackgov.service.AnaliseEspacialService;
+import br.com.hackgov.service.EstatisticaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnaliseController {
 
     private final AnaliseEspacialService service;
+    private final EstatisticaService estatisticaService;
 
-    public AnaliseController(AnaliseEspacialService service) {
+    public AnaliseController(AnaliseEspacialService service, EstatisticaService estatisticaService) {
         this.service = service;
+        this.estatisticaService = estatisticaService;
+    }
+
+    @GetMapping("/estatistica")
+    @PreAuthorize("hasAnyRole('SERVIDOR','GESTOR')")
+    @Operation(summary = "Relatório estatístico (Fase 7): correlação de Pearson e regressão linear com teste de "
+            + "significância — atraso × nota, bairro, volume × tempo e projeção do volume semanal")
+    public ResponseEntity<ApiResponse<EstatisticaResponse>> estatistica() {
+        return ResponseEntity.ok(ApiResponse.ok(estatisticaService.relatorio()));
     }
 
     @GetMapping("/agrupamentos")
