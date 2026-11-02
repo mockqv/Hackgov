@@ -6,7 +6,10 @@ Sistema de Zeladoria Urbana · FIAP 2SIOA · Richard V. F. Silva · RM565628
 hackgov-monorepo/
 ├── backend/          → Spring Boot 3.2 + Java 17 + Oracle
 ├── frontend/         → React 18 + Vite + TailwindCSS
+├── blockchain/       → smart contract Solidity (HackGovRegistro) + testes e demonstração (Fase 7)
 ├── database/fase6/   → camada analítica (índices + view) e consultas SQL da Fase 6
+├── database/fase7/   → correlação e regressão em SQL (CORR, REGR_*) da Fase 7
+├── scripts/          → backup e restauração do Oracle (Data Pump)
 ├── docker/           → Dockerfiles
 ├── docker-compose.yml
 └── README.md
@@ -36,6 +39,40 @@ Os scripts da Fase 6 criam uma view. Se o usuário `hackgov` foi criado à mão 
 ```sql
 GRANT CREATE VIEW TO hackgov;
 ```
+
+## Fase 7 — Visão de futuro: segurança, estatística e blockchain
+
+| Recurso | Onde |
+|---|---|
+| Smart contract `HackGovRegistro` (máquina de estados, SLA na cadeia, ancoragem em lote, prova de Merkle) | `blockchain/contracts/HackGovRegistro.sol` |
+| Testes do contrato (7) e demonstração | `blockchain/test/`, `blockchain/scripts/demo.js` |
+| Integridade da auditoria: raiz de Merkle por dia, ancoragem, verificação e prova por protocolo | `backend/.../integridade/`, `GET /api/integridade/lotes`, `POST /api/integridade/lotes/{data}/ancora`, `GET /api/integridade/prova/{protocolo}` |
+| Relatório estatístico: Pearson, regressão, valor-p, intervalo de predição | `backend/.../estatistica/`, `GET /api/analise/estatistica` |
+| Telas Estatística e Integridade (servidor e gestor) | `frontend/src/pages/servidor/` |
+| Correlação e regressão em SQL | `database/fase7/03_estatistica.sql` |
+| Rate limit por cliente atrás do Nginx (X-Real-IP só da rede interna) | `backend/.../security/IpCliente.java` |
+| Cabeçalhos de segurança, limite de taxa e tamanho no Nginx | `frontend/nginx.conf` |
+| Backup/restauração com SHA-256 e retenção | `scripts/backup_oracle.sh`, `scripts/restaurar_oracle.sh` |
+
+### Blockchain (precisa de Node 18+)
+```bash
+cd blockchain
+npm install
+npm test                                       # compila com solc-js e roda os 7 testes numa EVM em memória
+npm run demo                                   # demonstração só com a blockchain
+npm run demo -- --api http://localhost:8081    # com o HackGov no ar: ancora os dias de auditoria
+```
+Depois de ancorar, a tela **Integridade** mostra os dias como ÍNTEGROS. Para ver a detecção de
+adulteração, altere um evento direto no banco e clique em *Verificar agora*:
+```sql
+UPDATE historico_status SET justificativa = 'editado direto no banco'
+WHERE id_historico = (SELECT MIN(id_historico) FROM historico_status
+                      WHERE data_hora >= DATE '2026-09-28' AND data_hora < DATE '2026-09-29');
+COMMIT;
+```
+
+### Testes do back-end
+`mvn test` em `backend/` (inclui `EstatisticaTest`, `MerkleSha256Test` e `IpClienteTest`).
 
 ## Fase 6 — IA, análise de dados e estruturas de dados
 
