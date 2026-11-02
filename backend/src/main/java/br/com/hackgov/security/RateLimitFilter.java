@@ -61,7 +61,8 @@ public class RateLimitFilter extends OncePerRequestFilter {
             return;
         }
 
-        String ip = req.getRemoteAddr();
+        // atrás do Nginx, o IP real vem em X-Real-IP (só confiável vindo da rede interna)
+        String ip = IpCliente.resolver(req.getRemoteAddr(), req.getHeader("X-Real-IP"));
         Deque<Long> tentativas = tentativasPorIp.computeIfAbsent(ip, k -> new ConcurrentLinkedDeque<>());
         long agora = System.currentTimeMillis();
 

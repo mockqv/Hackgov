@@ -17,3 +17,8 @@ frontend/.env.local
 # Uploads de fotos (Fase 6)
 uploads/
 backend/uploads/
+
+# Backups do Oracle (Fase 7) e blockchain
+backups/
+blockchain/node_modules/
+blockchain/artifacts/
