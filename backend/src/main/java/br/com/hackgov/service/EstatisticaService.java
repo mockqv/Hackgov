@@ -190,7 +190,7 @@ public class EstatisticaService {
                 : String.format(BR,
                     "O volume da semana não explica o tempo de atendimento (p = %.2f): semanas de pico não são mais "
                     + "lentas. Contratar só para os picos não resolveria; o atraso está ligado ao bairro (análise B) e "
-                    + "ao tipo errado na abertura (+3 dias de retrabalho, medido na Fase 6) — onde a IA de triagem atua.",
+                    + "ao tipo errado na abertura, que manda o chamado para a equipe errada — onde a IA de triagem atua.",
                     r.valorP());
         List<Ponto> pontos = new ArrayList<>();
         for (int i = 0; i < pares.size(); i++) pontos.add(new Ponto(pares.get(i)[0], pares.get(i)[1], rotulos.get(i)));
