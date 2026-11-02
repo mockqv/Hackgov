@@ -92,6 +92,13 @@ export const iaApi = {
 // Análise espacial: KD-Tree + Union-Find no backend
 export const analiseApi = {
   agrupamentos: (params) => api.get('/analise/agrupamentos', { params }),
+  estatistica:  ()       => api.get('/analise/estatistica'),
+}
+
+// Fase 7 — integridade da auditoria (raízes de Merkle ancoradas no contrato HackGovRegistro)
+export const integridadeApi = {
+  lotes: ()          => api.get('/integridade/lotes'),
+  prova: (protocolo) => api.get(`/integridade/prova/${encodeURIComponent(protocolo)}`),
 }
 
 export const bairroApi = {

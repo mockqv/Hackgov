@@ -26,6 +26,8 @@ import Painel       from '../pages/servidor/Painel'
 import Dashboard    from '../pages/servidor/Dashboard'
 import TiposServico from '../pages/servidor/TiposServico'
 import Inteligencia from '../pages/servidor/Inteligencia'
+import Estatistica from '../pages/servidor/Estatistica'
+import Integridade from '../pages/servidor/Integridade'
 
 // Erros
 import Forbidden from '../pages/erro/Forbidden'
@@ -65,6 +67,8 @@ export default function AppRouter() {
           <Route path="dashboard" element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Dashboard /></RoleRoute>} />
           {/* Fase 6: IA de triagem + análise espacial */}
           <Route path="inteligencia" element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Inteligencia /></RoleRoute>} />
+          <Route path="estatistica"  element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Estatistica  /></RoleRoute>} />
+          <Route path="integridade"  element={<RoleRoute roles={[PERFIL.SERVIDOR, PERFIL.GESTOR]}><Integridade  /></RoleRoute>} />
 
           {/* ─── PRIVADA — SOMENTE GESTOR (CRUD do catálogo de tipos de serviço) ─── */}
           <Route path="tipos-servico" element={<RoleRoute roles={[PERFIL.GESTOR]}><TiposServico /></RoleRoute>} />
